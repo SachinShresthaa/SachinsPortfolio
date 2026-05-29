@@ -17,11 +17,20 @@
       --muted: rgba(10,10,10,0.38);
     }
 
+    /* ── Roxborough CF ── */
+    @font-face {
+      font-family: 'Roxborough CF';
+      src: url('https://db.onlinewebfonts.com/t/9c0f1f68e67f6e4f0cdde7e39cf527d2.woff2') format('woff2'),
+           url('https://db.onlinewebfonts.com/t/9c0f1f68e67f6e4f0cdde7e39cf527d2.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     html, body {
       width: 100%;
       background: var(--bg);
       color: var(--fg);
-      font-family: 'Inter', sans-serif;
+      font-family: "Roxborough CF";
       overflow-x: hidden;
       cursor: none;
     }
@@ -52,11 +61,7 @@
       z-index: 200;
       background: var(--bg);
       height: 88px;
-      border-bottom: 1px solid rgba(10,10,10,0.07);
-
-      /* THREE-column grid:
-         left group | center logo | right group
-         each column is 1fr so logo is truly centered */
+      /* ✅ REMOVED border-bottom */
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
@@ -71,7 +76,7 @@
     .nav-left {
       display: flex;
       align-items: center;
-      justify-content: flex-end;   /* ← links sit CLOSE to logo */
+      justify-content: flex-end;
       list-style: none;
       gap: 0;
     }
@@ -79,7 +84,7 @@
     .nav-right {
       display: flex;
       align-items: center;
-      justify-content: flex-start; /* ← links sit CLOSE to logo */
+      justify-content: flex-start;
       list-style: none;
       gap: 0;
     }
@@ -88,7 +93,7 @@
     .nav-right li a {
       text-decoration: none;
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -100,18 +105,20 @@
     .nav-left li a:hover,
     .nav-right li a:hover { opacity: 1; }
 
+    /* ✅ dot — smaller, like image 2 */
     .nav-left .dot,
     .nav-right .dot {
-      width: 3.5px; height: 3.5px;
-      background: rgba(10,10,10,0.25);
+      width: 3px; height: 3px;
+      background: rgba(10,10,10,0.28);
       border-radius: 50%;
       flex-shrink: 0;
     }
+
     .nav-logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 24px;   
+      padding: 0 24px;
     }
     .nav-logo img {
       width: 200px;
@@ -120,6 +127,7 @@
       filter: brightness(0) opacity(0.82);
       display: block;
     }
+
     .hero {
       position: relative;
       width: 100vw;
@@ -130,16 +138,14 @@
       justify-content: center;
       overflow: hidden;
       background: var(--bg);
-      padding-top: 88px; /* = nav height */
+      padding-top: 88px;
     }
 
-    /* portrait — centered, logo will align above it */
     .hero-image-wrap {
       position: relative;
       width: 340px;
       height: 490px;
       z-index: 2;
-      /* no extra margin — stays at horizontal center */
     }
     .hero-image-wrap img {
       width: 100%; height: 100%;
@@ -152,7 +158,6 @@
     .hero-image-wrap img:hover {
       filter: grayscale(0%) contrast(1.05);
     }
-    /* fade bottom into bg */
     .hero-image-wrap::after {
       content: '';
       position: absolute;
@@ -179,19 +184,18 @@
       gap: 16px;
     }
 
-    /* Bodoni Moda — NO italic, upright */
+    /* ✅ Roxborough CF for name */
     .name-serif {
-      font-family: 'Bodoni Moda', serif;
-      font-style: normal;          /* ← NOT italic */
+      font-family: 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
+      font-style: normal;
       font-weight: 400;
       font-size: clamp(70px, 11vw, 150px);
       color: var(--fg);
       letter-spacing: -0.01em;
     }
 
-    /* Inter light — upright */
     .name-sans {
-      font-family: 'Bodoni Moda', serif;  /* same font, consistent look */
+      font-family: 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
       font-style: normal;
       font-weight: 400;
       font-size: clamp(70px, 11vw, 150px);
@@ -199,7 +203,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* slide number left */
     .slide-num {
       position: absolute;
       left: 52px; top: 50%;
@@ -213,7 +216,6 @@
       background: var(--muted); display: block;
     }
 
-    /* dot right */
     .slide-dot {
       position: absolute;
       right: 64px; top: 50%;
@@ -231,7 +233,6 @@
       background: var(--fg); border-radius: 50%;
     }
 
-    /* scroll hint */
     .scroll-hint {
       position: absolute;
       bottom: 24px; left: 52px; z-index: 10;
@@ -249,7 +250,6 @@
       50%      { transform: scaleY(0.3); opacity: 0.2; }
     }
 
-    /* animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -260,7 +260,6 @@
     .a4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s  both; }
     .a5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
 
-    /* grain */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -273,42 +272,30 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- ═══ NAV ═══ -->
   <nav id="navbar" class="a1">
-
-    <!-- LEFT — links hug toward center logo -->
     <ul class="nav-left">
       <li><a href="#about">About</a></li>
       <span class="dot"></span>
       <li><a href="#work">Work</a></li>
     </ul>
 
-    <!-- CENTER — logo directly above photo -->
     <div class="nav-logo a2">
       <img src="assets/logo.png" alt="SS" />
     </div>
 
-    <!-- RIGHT — links hug toward center logo -->
     <ul class="nav-right">
       <li><a href="#shop">Shop</a></li>
       <span class="dot"></span>
       <li><a href="#contact">Contact</a></li>
     </ul>
-
   </nav>
 
-  <!-- ═══ HERO ═══ -->
   <section class="hero">
 
-    <div class="slide-num a3">01</div>
-    <div class="slide-dot a3"><span></span></div>
-
-    <!-- photo — centered = logo above it -->
     <div class="hero-image-wrap a2">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
-    <!-- name — Bodoni Moda, no italic -->
     <div class="hero-name a4">
       <div class="name-row">
         <span class="name-serif">Sachin</span>
