@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sachin Shrestha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,12 +14,14 @@
     :root {
       --bg: #EEEEEE;
       --fg: #0a0a0a;
-      --muted: rgba(10,10,10,0.45);
-      --accent: #1a1a2e;
+      --muted: rgba(10,10,10,0.4);
+      --nav-bg: #0e1a2e;
+      --nav-text: rgba(255,255,255,0.75);
+      --nav-dot: rgba(255,255,255,0.35);
     }
 
     html, body {
-      width: 100%; height: 100%;
+      width: 100%;
       background: var(--bg);
       color: var(--fg);
       font-family: 'Inter', sans-serif;
@@ -36,69 +38,89 @@
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+      transition: transform 0.12s ease;
     }
     #cursor-ring {
       position: fixed; top: 0; left: 0;
       width: 32px; height: 32px;
-      border: 1.5px solid rgba(10,10,10,0.4);
+      border: 1.5px solid rgba(10,10,10,0.35);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
       transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
     }
 
-    /* ── NAV ── */
+    /* ══════════════════════════════════════
+       NAV  — dark bar like Simon Sparks
+    ══════════════════════════════════════ */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
+      background: var(--nav-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 28px 52px;
-      transition: background 0.4s ease;
-    }
-    nav.scrolled {
-      background: rgba(238,238,238,0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(10,10,10,0.08);
+      padding: 0 64px;
+      height: 72px;
     }
 
-    .nav-links {
-      display: flex; gap: 44px;
+    /* subtle bottom glow line */
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
       list-style: none;
     }
-    .nav-links a {
+
+    .nav-group li a {
       text-decoration: none;
       font-size: 11px;
-      letter-spacing: 0.18em;
+      font-weight: 400;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--fg);
-      opacity: 0.55;
-      transition: opacity 0.2s;
+      color: var(--nav-text);
+      padding: 0 22px;
+      transition: color 0.2s;
     }
-    .nav-links a:hover { opacity: 1; }
+    .nav-group li a:hover { color: #fff; }
 
-    /* SS logo in nav center */
+    /* dot separators */
+    .nav-group .dot {
+      width: 4px; height: 4px;
+      background: var(--nav-dot);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* center logo */
     .nav-logo {
-      position: absolute; left: 50%; transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .nav-logo img {
-      width: 48px; height: 48px;
+      width: 52px;
+      height: 52px;
       object-fit: contain;
-      filter: invert(1) brightness(0.2);
-      mix-blend-mode: multiply;
+      /* green logo → make it light/white for dark nav */
+      filter: brightness(0) invert(1) opacity(0.85);
     }
 
-    /* Nav dots */
-    .nav-dot {
-      width: 3px; height: 3px;
-      background: var(--muted);
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    /* ── HERO SECTION ── */
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
     .hero {
       position: relative;
       width: 100vw;
@@ -109,15 +131,16 @@
       justify-content: center;
       overflow: hidden;
       background: var(--bg);
+      padding-top: 72px; /* nav height */
     }
 
-    /* Center portrait image */
+    /* Portrait */
     .hero-image-wrap {
       position: relative;
-      width: 380px;
-      height: 520px;
-      margin: 0 auto;
+      width: 340px;
+      height: 500px;
       z-index: 2;
+      margin-top: -20px;
     }
     .hero-image-wrap img {
       width: 100%;
@@ -125,51 +148,26 @@
       object-fit: cover;
       object-position: top center;
       display: block;
-      filter: grayscale(100%) contrast(1.05);
-      transition: filter 0.6s ease;
+      filter: grayscale(100%) contrast(1.08);
+      transition: filter 0.7s ease;
     }
-    .hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
-
-    /* Fade vignette at bottom of portrait */
+    .hero-image-wrap img:hover {
+      filter: grayscale(0%) contrast(1.05);
+    }
+    /* fade bottom of portrait into bg */
     .hero-image-wrap::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 45%;
+      height: 50%;
       background: linear-gradient(to bottom, transparent, var(--bg));
       pointer-events: none;
-    }
-
-    /* ILLUSTRATION label — top of image */
-    .label-top {
-      position: absolute;
-      top: -30px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-      z-index: 3;
-    }
-
-    /* GENERATIVE DESIGN label — bottom */
-    .label-bottom {
-      position: absolute;
-      bottom: -8px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-      z-index: 3;
     }
 
     /* ── BIG NAME ── */
     .hero-name {
       position: absolute;
-      bottom: 52px;
+      bottom: 44px;
       left: 0; right: 0;
       text-align: center;
       z-index: 3;
@@ -181,25 +179,28 @@
       display: flex;
       align-items: baseline;
       justify-content: center;
-      line-height: 0.88;
+      line-height: 1;
+      gap: 16px;
     }
-    .name-italic {
-      font-family: 'Cormorant Garamond', serif;
+    /* italic serif — Bodoni Moda */
+    .name-serif {
+      font-family: 'Bodoni Moda', serif;
       font-style: italic;
-      font-weight: 300;
-      font-size: clamp(72px, 11vw, 148px);
+      font-weight: 400;
+      font-size: clamp(68px, 10.5vw, 148px);
       color: var(--fg);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
+    /* upright sans — Inter light */
     .name-sans {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
-      font-size: clamp(72px, 11vw, 148px);
+      font-size: clamp(68px, 10.5vw, 148px);
       color: var(--fg);
       letter-spacing: -0.04em;
     }
 
-    /* ── SLIDE NUMBER left ── */
+    /* ── SLIDE NUM left ── */
     .slide-num {
       position: absolute;
       left: 52px; top: 50%;
@@ -211,150 +212,118 @@
     }
     .slide-num::after {
       content: '';
-      display: block;
-      width: 60px; height: 1px;
+      width: 56px; height: 1px;
       background: var(--muted);
+      display: block;
     }
 
-    /* ── NAV ARROWS right ── */
-    .slide-arrows {
+    /* ── dot right ── */
+    .slide-dot {
       position: absolute;
-      right: 52px; top: 50%;
+      right: 68px; top: 50%;
       transform: translateY(-50%);
-      display: flex; flex-direction: column;
-      gap: 10px; align-items: center;
       z-index: 10;
     }
-    .arrow-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(10,10,10,0.2);
+    .slide-dot span {
+      width: 28px; height: 28px;
+      border: 1.5px solid rgba(10,10,10,0.25);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      background: transparent;
-      transition: all 0.2s ease;
-      font-size: 13px;
     }
-    .arrow-btn:hover {
+    .slide-dot span::after {
+      content: '';
+      width: 5px; height: 5px;
       background: var(--fg);
-      color: var(--bg);
-      border-color: var(--fg);
+      border-radius: 50%;
     }
 
-    /* ── INTRO TEXT overlay (top left under nav) ── */
-    .hero-intro {
-      position: absolute;
-      top: 110px; left: 52px;
-      z-index: 5;
-      max-width: 220px;
-    }
-    .hero-intro p {
-      font-size: 12px;
-      line-height: 1.7;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    /* ── AVAILABLE BADGE top right ── */
-    .badge {
-      position: absolute;
-      top: 110px; right: 52px;
-      z-index: 5;
-      border: 1px solid rgba(10,10,10,0.15);
-      border-radius: 50px;
-      padding: 7px 16px;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── SCROLL indicator bottom left ── */
+    /* ── SCROLL hint ── */
     .scroll-hint {
       position: absolute;
-      bottom: 32px; left: 52px;
+      bottom: 28px; left: 52px;
       z-index: 10;
       display: flex; align-items: center; gap: 10px;
-      font-size: 10px; letter-spacing: 0.2em;
+      font-size: 10px; letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
     }
     .scroll-line {
-      width: 1px; height: 40px;
+      width: 1px; height: 36px;
       background: var(--muted);
-      display: inline-block;
-      animation: scrollAnim 1.6s ease-in-out infinite;
+      animation: scrl 1.8s ease-in-out infinite;
     }
-    @keyframes scrollAnim {
-      0%,100% { transform: scaleY(1); opacity: 1; }
-      50%      { transform: scaleY(0.4); opacity: 0.3; }
+    @keyframes scrl {
+      0%,100% { transform: scaleY(1); opacity: 0.8; }
+      50%      { transform: scaleY(0.35); opacity: 0.2; }
     }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .anim-1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
-    .anim-2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
-    .anim-3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
-    .anim-4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
-    .anim-5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+    .a1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+    .a2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s  both; }
+    .a3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+    .a4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s  both; }
+    .a5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
 
-    /* ── Grain ── */
+    /* ── grain overlay ── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
     }
   </style>
 </head>
 <body>
 
-  <!-- Custom Cursor -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- ── NAVIGATION ── -->
-  <nav id="navbar">
-    <!-- Left links -->
-    <ul class="nav-links anim-1">
+  <!-- ════════ NAV ════════ -->
+  <nav class="a1">
+    <!-- LEFT -->
+    <ul class="nav-group">
       <li><a href="#about">About</a></li>
-      <span class="nav-dot"></span>
+      <span class="dot"></span>
       <li><a href="#work">Work</a></li>
     </ul>
 
-    <!-- Center logo -->
-    <div class="nav-logo anim-2">
-      <img src="assets/logo.png" alt="SS Logo" />
+    <!-- CENTER LOGO -->
+    <div class="nav-logo a2">
+      <img src="assets/logo.png" alt="SS" />
     </div>
 
-    <!-- Right links -->
-    <ul class="nav-links anim-1">
+    <!-- RIGHT -->
+    <ul class="nav-group">
       <li><a href="#shop">Shop</a></li>
-      <span class="nav-dot"></span>
+      <span class="dot"></span>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ── HERO ── -->
+  <!-- ════════ HERO ════════ -->
   <section class="hero">
 
-    <!-- Center portrait -->
-    <div class="hero-image-wrap anim-2">
+    <div class="slide-num a3">01</div>
+    <div class="slide-dot a3"><span></span></div>
+
+    <!-- Portrait -->
+    <div class="hero-image-wrap a2">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
-    <!-- BIG NAME at bottom -->
-    <div class="hero-name anim-5">
+    <!-- Name -->
+    <div class="hero-name a4">
       <div class="name-row">
-        <span class="name-italic">Sachin&nbsp;</span>
+        <span class="name-serif">Sachin</span>
         <span class="name-sans">Shrestha</span>
       </div>
     </div>
 
-    <!-- Scroll hint -->
-    <div class="scroll-hint anim-5">
+    <!-- Scroll -->
+    <div class="scroll-hint a5">
       <span class="scroll-line"></span>
       Scroll
     </div>
@@ -362,41 +331,30 @@
   </section>
 
   <script>
-    // ── Cursor ──
-    const dot = document.getElementById('cursor-dot');
+    /* cursor */
+    const dot  = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    let mx=0,my=0,rx=0,ry=0;
 
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
+      dot.style.left = mx+'px'; dot.style.top = my+'px';
     });
-
-    (function raf() {
-      rx += (mx - rx) * 0.1;
-      ry += (my - ry) * 0.1;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
+    (function raf(){
+      rx += (mx-rx)*0.1; ry += (my-ry)*0.1;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
       requestAnimationFrame(raf);
     })();
 
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        dot.style.transform  = 'translate(-50%,-50%) scale(2.5)';
-        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
-        ring.style.borderColor = 'rgba(10,10,10,0.6)';
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{
+        dot.style.transform='translate(-50%,-50%) scale(2.5)';
+        ring.style.width='52px'; ring.style.height='52px';
       });
-      el.addEventListener('mouseleave', () => {
-        dot.style.transform  = 'translate(-50%,-50%) scale(1)';
-        ring.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.borderColor = 'rgba(10,10,10,0.4)';
+      el.addEventListener('mouseleave',()=>{
+        dot.style.transform='translate(-50%,-50%) scale(1)';
+        ring.style.width='32px'; ring.style.height='32px';
       });
-    });
-
-    // ── Scroll-aware nav ──
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
     });
   </script>
 </body>
