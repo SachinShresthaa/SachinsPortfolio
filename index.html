@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sachin Shrestha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #EEEEEE;
+      --fg: #0a0a0a;
+      --muted: rgba(10,10,10,0.45);
+      --accent: #1a1a2e;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── Custom cursor ── */
+    #cursor-dot {
+      position: fixed; top: 0; left: 0;
+      width: 8px; height: 8px;
+      background: var(--fg);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0;
+      width: 32px; height: 32px;
+      border: 1.5px solid rgba(10,10,10,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 52px;
+      transition: background 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(238,238,238,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+    }
+
+    .nav-links {
+      display: flex; gap: 44px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg);
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* SS logo in nav center */
+    .nav-logo {
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .nav-logo img {
+      width: 48px; height: 48px;
+      object-fit: contain;
+      filter: invert(1) brightness(0.2);
+      mix-blend-mode: multiply;
+    }
+
+    /* Nav dots */
+    .nav-dot {
+      width: 3px; height: 3px;
+      background: var(--muted);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Center portrait image */
+    .hero-image-wrap {
+      position: relative;
+      width: 380px;
+      height: 520px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: grayscale(100%) contrast(1.05);
+      transition: filter 0.6s ease;
+    }
+    .hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
+
+    /* Fade vignette at bottom of portrait */
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    /* ILLUSTRATION label — top of image */
+    .label-top {
+      position: absolute;
+      top: -30px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    /* GENERATIVE DESIGN label — bottom */
+    .label-bottom {
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    /* ── BIG NAME ── */
+    .hero-name {
+      position: absolute;
+      bottom: 52px;
+      left: 0; right: 0;
+      text-align: center;
+      z-index: 3;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .hero-name .name-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      line-height: 0.88;
+    }
+    .name-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(72px, 11vw, 148px);
+      color: var(--fg);
+      letter-spacing: -0.02em;
+    }
+    .name-sans {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(72px, 11vw, 148px);
+      color: var(--fg);
+      letter-spacing: -0.04em;
+    }
+
+    /* ── SLIDE NUMBER left ── */
+    .slide-num {
+      position: absolute;
+      left: 52px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; align-items: center; gap: 14px;
+      font-size: 11px; letter-spacing: 0.15em;
+      color: var(--muted);
+      z-index: 10;
+    }
+    .slide-num::after {
+      content: '';
+      display: block;
+      width: 60px; height: 1px;
+      background: var(--muted);
+    }
+
+    /* ── NAV ARROWS right ── */
+    .slide-arrows {
+      position: absolute;
+      right: 52px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column;
+      gap: 10px; align-items: center;
+      z-index: 10;
+    }
+    .arrow-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(10,10,10,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.2s ease;
+      font-size: 13px;
+    }
+    .arrow-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    /* ── INTRO TEXT overlay (top left under nav) ── */
+    .hero-intro {
+      position: absolute;
+      top: 110px; left: 52px;
+      z-index: 5;
+      max-width: 220px;
+    }
+    .hero-intro p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── AVAILABLE BADGE top right ── */
+    .badge {
+      position: absolute;
+      top: 110px; right: 52px;
+      z-index: 5;
+      border: 1px solid rgba(10,10,10,0.15);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SCROLL indicator bottom left ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px; left: 52px;
+      z-index: 10;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: var(--muted);
+      display: inline-block;
+      animation: scrollAnim 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollAnim {
+      0%,100% { transform: scaleY(1); opacity: 1; }
+      50%      { transform: scaleY(0.4); opacity: 0.3; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+    .anim-2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+    .anim-3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+    .anim-4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+    .anim-5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+
+    /* ── Grain ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── NAVIGATION ── -->
+  <nav id="navbar">
+    <!-- Left links -->
+    <ul class="nav-links anim-1">
+      <li><a href="#about">About</a></li>
+      <span class="nav-dot"></span>
+      <li><a href="#work">Work</a></li>
+    </ul>
+
+    <!-- Center logo -->
+    <div class="nav-logo anim-2">
+      <img src="assets/ChatGPT Image May 29, 2026, 09_03_39 PM.png" alt="SS Logo" />
+    </div>
+
+    <!-- Right links -->
+    <ul class="nav-links anim-1">
+      <li><a href="#shop">Shop</a></li>
+      <span class="nav-dot"></span>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+
+    <!-- Center portrait -->
+    <div class="hero-image-wrap anim-2">
+      <img src="assets/pp.png" alt="Sachin Shrestha" />
+    </div>
+
+    <!-- BIG NAME at bottom -->
+    <div class="hero-name anim-5">
+      <div class="name-row">
+        <span class="name-italic">Sachin&nbsp;</span>
+        <span class="name-sans">Shrestha</span>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint anim-5">
+      <span class="scroll-line"></span>
+      Scroll
+    </div>
+
+  </section>
+
+  <script>
+    // ── Cursor ──
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+    });
+
+    (function raf() {
+      rx += (mx - rx) * 0.1;
+      ry += (my - ry) * 0.1;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(raf);
+    })();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.style.transform  = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        ring.style.borderColor = 'rgba(10,10,10,0.6)';
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.style.transform  = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'rgba(10,10,10,0.4)';
+      });
+    });
+
+    // ── Scroll-aware nav ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>
