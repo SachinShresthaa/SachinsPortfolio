@@ -80,6 +80,7 @@ nav {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 60px;
+  padding-top: 1cm;              /* 1cm space above nav content */
 }
 nav.scrolled {
   background: rgba(238,238,238,0.93);
@@ -96,7 +97,7 @@ nav.scrolled {
 .nav-left li a, .nav-right li a {
   text-decoration: none;
   font-family: 'Inter', sans-serif;
-  font-size: 17px; font-weight: 400;
+  font-size: 16px; font-weight: 500;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--fg); opacity: 0.60; padding: 0 50px;
   transition: opacity 0.3s;
@@ -112,9 +113,9 @@ nav.scrolled {
   justify-content: center; padding: 0 24px;
 }
 .nav-logo img {
-  width: 200px; height: 200px;
+  width: 80px; height: 80px;
   object-fit: contain;
-  filter: brightness(0) opacity(0.82);
+  filter: brightness(0) opacity(1);
 }
 
 /* ════ HERO ════ */
@@ -234,9 +235,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-/* ════ HOVER BAR — splits open from center ════ */
-
-/* wrapper — fixed center, zero height, clips the two halves */
+/* ════ HOVER BAR ════ */
 #hover-bar {
   position: fixed;
   top: 59%;
@@ -245,42 +244,33 @@ body::before {
   transform: translateY(-90%);
   z-index: 150;
   pointer-events: none;
-  overflow: hidden;   /* clips halves while they animate */
+  overflow: hidden;
 }
 
-/* top half — starts at center (translateY 0), opens by sliding UP */
 #hover-bar .bar-top {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 50%;
   background: #0a0a0a;
-  transform-origin: bottom center;  /* grows from bottom edge (center) */
-  transform: scaleY(0);             /* closed — zero height at center */
+  transform-origin: bottom center;
+  transform: scaleY(0);
   transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
-  overflow: hidden;
 }
 
-/* bottom half — starts at center, opens by sliding DOWN */
 #hover-bar .bar-bot {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 50%;
   background: #0a0a0a;
-  transform-origin: top center;     /* grows from top edge (center) */
-  transform: scaleY(0);             /* closed — zero height at center */
+  transform-origin: top center;
+  transform: scaleY(0);
   transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
-  overflow: hidden;
 }
 
-/* OPEN — both halves scale out from center */
-#hover-bar.active .bar-top {
-  transform: scaleY(1);
-}
-#hover-bar.active .bar-bot {
-  transform: scaleY(1);
-}
+#hover-bar.active .bar-top { transform: scaleY(1); }
+#hover-bar.active .bar-bot { transform: scaleY(1); }
 
-/* text — perfectly centered, no offset */
+/* ── Text wrapper ── */
 #hover-bar-text {
   position: absolute;
   top: 58%; left: 50%;
@@ -295,9 +285,36 @@ body::before {
   user-select: none;
   white-space: nowrap;
   z-index: 5;
-  opacity: 0;
-  transition: opacity 0.15s ease 0.3s;
 }
-#hover-bar.active #hover-bar-text {
-  opacity: 1;
+
+/* Text split — top half */
+#hover-bar-text .txt-top {
+  display: block;
+  overflow: hidden;
+  height: 0.6em;                 /* slightly taller to cover the gap */
 }
+#hover-bar-text .txt-top span {
+  display: block;
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1) 0.05s;
+}
+
+/* Text split — bottom half */
+#hover-bar-text .txt-bot {
+  display: block;
+  overflow: hidden;
+  height: 0.6em;
+  margin-top: -0.18em;           /* pull up to overlap — removes visible line */
+}
+#hover-bar-text .txt-bot span {
+  display: block;
+  margin-top: -0.42em;
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1) 0.05s;
+}
+
+/* OPEN — text halves expand from center */
+#hover-bar.active .txt-top span { transform: scaleY(1); }
+#hover-bar.active .txt-bot span { transform: scaleY(1); }

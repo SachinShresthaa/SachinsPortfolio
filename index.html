@@ -103,12 +103,15 @@
     reveal('name-shrestha',  200);
     reveal('scroll-hint',   2000);
 
-    /* ✅ BLACK BAR HOVER — added */
+    /* ── BLACK BAR HOVER ── */
     const bar     = document.getElementById('hover-bar');
     const barText = document.getElementById('hover-bar-text');
 
     function showBar(label) {
-      barText.textContent = label;
+      /* ✅ split text into top/bottom halves */
+      barText.innerHTML =
+        `<span class="txt-top"><span>${label}</span></span>` +
+        `<span class="txt-bot"><span>${label}</span></span>`;
       bar.classList.add('active');
     }
     function hideBar() {
