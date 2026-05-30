@@ -1,0 +1,234 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+@font-face {
+    font-family: 'Theater';
+    src: url('../font/Theaterv04_Bold.ttf') format('truetype');
+}
+
+:root {
+  --bg: #EEEEEE;
+  --fg: #0a0a0a;
+  --muted: rgba(10,10,10,0.38);
+  --photo-w: 340px;
+}
+
+html, body {
+  width: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Cursor ── */
+#cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--fg); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.12s ease;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 34px; height: 34px;
+  border: 1.5px solid rgba(10,10,10,0.3);
+  border-radius: 50%; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width 0.2s, height 0.2s;
+}
+
+/* ══════════════════════════════════
+   REVEAL SYSTEM — only opacity changes
+   Sizes, positions, fonts: UNCHANGED
+══════════════════════════════════ */
+.nav-left,
+.nav-right,
+.nav-logo,
+.hero-image-wrap,
+.name-word,
+.scroll-hint {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-left.visible,
+.nav-right.visible,
+.nav-logo.visible,
+.hero-image-wrap.visible,
+.name-word.visible,
+.scroll-hint.visible {
+  opacity: 1;
+}
+
+/* ════ NAV ════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: var(--bg);
+  height: 88px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 60px;
+}
+nav.scrolled {
+  background: rgba(238,238,238,0.93);
+  backdrop-filter: blur(18px);
+}
+.nav-left {
+  display: flex; align-items: center;
+  justify-content: flex-end; list-style: none;
+}
+.nav-right {
+  display: flex; align-items: center;
+  justify-content: flex-start; list-style: none;
+}
+.nav-left li a, .nav-right li a {
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--fg); opacity: 0.60; padding: 0 50px;
+  transition: opacity 0.3s;
+}
+.nav-left li a:hover, .nav-right li a:hover { opacity: 1; }
+.nav-left .dot, .nav-right .dot {
+  width: 3px; height: 3px;
+  background: rgba(10,10,10,0.28);
+  border-radius: 50%; flex-shrink: 0;
+}
+.nav-logo {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-logo.visible {
+  opacity: 1;
+  transform: translateY(0);   /* slides to natural position */
+}
+.nav-logo img {
+  width: 200px; height: 200px;
+  object-fit: contain;
+  filter: brightness(0) opacity(0.82);
+}
+
+/* ════ HERO ════ */
+.hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+  padding-top: 88px;
+}
+
+/* ── portrait ── */
+.hero-image-wrap {
+  position: relative;
+  width: var(--photo-w);
+  height: 490px;
+  z-index: 3;
+  flex-shrink: 0;
+}
+.hero-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(100%) contrast(1.08);
+  transition: filter 0.7s ease;
+}
+.hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 35%;
+  background: linear-gradient(to bottom, transparent, var(--bg) 100%);
+  pointer-events: none;
+}
+
+/* ── Name words ── */
+.name-word {
+  position: absolute;
+  z-index: 2;
+  font-family: 'Theater', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  text-transform: uppercase;
+  color: var(--fg);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  font-size: clamp(20px, 6vw, 120px);
+}
+.name-sachin {
+  right: calc(44.5% + 170px);
+  top: calc(52% - 30px);
+  transform: translateY(-50%);
+  text-align: right;
+  
+}
+.name-shrestha {
+  left: calc(42.8% + 170px);
+  top: calc(55% + 55px);
+  transform: translateY(-50%);
+  text-align: left;
+}
+
+/* ── Slide dot ── */
+.slide-dot {
+  position: absolute;
+  right: 48px; top: 42%;
+  z-index: 10;
+}
+.slide-dot span {
+  width: 28px; height: 28px;
+  border: 1.5px solid rgba(10,10,10,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.slide-dot span::after {
+  content: ''; width: 6px; height: 6px;
+  background: var(--fg); border-radius: 50%;
+}
+
+/* ── Scroll hint ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px; left: 52px; z-index: 10;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: var(--muted);
+  animation: scrl 1.8s ease-in-out infinite;
+}
+@keyframes scrl {
+  0%,100% { transform: scaleY(1); opacity: 0.8; }
+  50%      { transform: scaleY(0.3); opacity: 0.2; }
+}
+
+/* ── Old animation classes kept (unused but harmless) ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.a1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+.a2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s  both; }
+.a3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
+.a4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s  both; }
+.a5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+
+/* ── Grain ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}

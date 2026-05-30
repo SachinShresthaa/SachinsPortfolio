@@ -7,232 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-@font-face {
-    font-family: 'Theater';
-    src: url('./font/Theaterv04_Bold.ttf') format('truetype');
-}
-    :root {
-      --bg: #EEEEEE;
-      --fg: #0a0a0a;
-      --muted: rgba(10,10,10,0.38);
-      --photo-w: 340px;   /* photo width — change once if you resize photo */
-    }
-
-    html, body {
-      width: 100%;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* cursor */
-    #cursor-dot {
-      position: fixed; top: 0; left: 0;
-      width: 8px; height: 8px;
-      background: var(--fg); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%);
-      transition: transform 0.12s ease;
-    }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0;
-      width: 34px; height: 34px;
-      border: 1.5px solid rgba(10,10,10,0.3);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%);
-      transition: width 0.2s, height 0.2s;
-    }
-
-    /* ════ NAV ════ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 200;
-      background: var(--bg);
-      height: 88px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 0 60px;
-    }
-    nav.scrolled {
-      background: rgba(238,238,238,0.93);
-      backdrop-filter: blur(18px);
-    }
-    .nav-left {
-      display: flex; align-items: center;
-      justify-content: flex-end; list-style: none;
-    }
-    .nav-right {
-      display: flex; align-items: center;
-      justify-content: flex-start; list-style: none;
-    }
-    .nav-left li a, .nav-right li a {
-      text-decoration: none;
-      font-family: 'Inter', sans-serif;
-      font-size: 17px; font-weight: 400;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--fg); opacity: 0.60; padding: 0 50px;
-      transition: opacity 0.3s;
-    }
-    .nav-left li a:hover, .nav-right li a:hover { opacity: 1; }
-    .nav-left .dot, .nav-right .dot {
-      width: 3px; height: 3px;
-      background: rgba(10,10,10,0.28);
-      border-radius: 50%; flex-shrink: 0;
-    }
-    .nav-logo {
-      display: flex; align-items: center;
-      justify-content: center; padding: 0 24px;
-    }
-    .nav-logo img {
-      width: 200px; height: 200px;
-      object-fit: contain;
-      filter: brightness(0) opacity(0.82);
-    }
-
-    /* ════ HERO ════ */
-    .hero {
-      position: relative;
-      width: 100vw;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: var(--bg);
-      padding-top: 88px;
-    }
-
-    /* ── portrait ── */
-    .hero-image-wrap {
-      position: relative;
-      width: var(--photo-w);
-      height: 490px;
-      z-index: 3;          /* photo ON TOP of name words */
-      flex-shrink: 0;
-    }
-    .hero-image-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      filter: grayscale(100%) contrast(1.08);
-      transition: filter 0.7s ease;
-    }
-    .hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
-    .hero-image-wrap::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0; height: 35%;
-      background: linear-gradient(to bottom, transparent, var(--bg)100%);
-      pointer-events: none;
-    }
-
-    /* ════════════════════════════════════════════
-       KEY IDEA:
-       The hero is a flex row. Photo sits in center.
-       SACHIN is absolutely positioned so its RIGHT
-       edge = the photo's LEFT edge  (N touches photo)
-       SHRESTHA is absolutely positioned so its LEFT
-       edge = the photo's RIGHT edge (S touches photo)
-
-       Photo center = 50vw
-       Photo left   = 50vw - 170px
-       Photo right  = 50vw + 170px
-    ════════════════════════════════════════════ */
-
-    .name-word {
-      position: absolute;
-      z-index: 2;                    /* behind photo */
-      font-family: 'Theater', sans-serif;
-      font-weight: 500;
-      font-style: normal;
-      text-transform: uppercase;
-      color: var(--fg);
-      letter-spacing: 0.05em;
-      line-height: 1;
-      white-space: nowrap;
-      font-size: clamp(20px, 6vw, 120px);
-    }
-
-    /* SACHIN — text RIGHT edge flush to photo LEFT edge
-       "N" is the last char → it kisses the photo left side
-       vertical: upper (neck area) */
-    .name-sachin {
-      right: calc(44.5% + 170px);     /* photo left edge */
-      top: calc(45.5% - 30px);        /* neck height */
-      transform: translateY(-50%);
-      text-align: right;
-    }
-
-    /* SHRESTHA — text LEFT edge flush to photo RIGHT edge
-       "S" is the first char → it kisses the photo right side
-       vertical: lower (chest area) */
-    .name-shrestha {
-      left: calc(43% + 170px);      /* photo right edge */
-      top: calc(50% + 55px);        /* chest height — lower */
-      transform: translateY(-50%);
-      text-align: left;
-    }
-
-    /* slide dot */
-    .slide-dot {
-      position: absolute;
-      right: 48px;
-      top: 42%;
-      z-index: 10;
-    }
-    .slide-dot span {
-      width: 28px; height: 28px;
-      border: 1.5px solid rgba(10,10,10,0.2);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .slide-dot span::after {
-      content: ''; width: 6px; height: 6px;
-      background: var(--fg); border-radius: 50%;
-    }
-
-    /* scroll hint */
-    .scroll-hint {
-      position: absolute;
-      bottom: 28px; left: 52px; z-index: 10;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 10px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .scroll-line {
-      width: 1px; height: 36px;
-      background: var(--muted);
-      animation: scrl 1.8s ease-in-out infinite;
-    }
-    @keyframes scrl {
-      0%,100% { transform: scaleY(1); opacity: 0.8; }
-      50%      { transform: scaleY(0.3); opacity: 0.2; }
-    }
-
-    /* animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .a1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-    .a2 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s  both; }
-    .a3 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
-    .a4 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s  both; }
-    .a5 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
-
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    }
-  </style>
+  <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
 
@@ -240,16 +15,16 @@
   <div id="cursor-ring"></div>
 
   <!-- NAV -->
-  <nav id="navbar" class="a1">
-    <ul class="nav-left">
+  <nav id="navbar">
+    <ul class="nav-left" id="nav-left">
       <li><a href="#about">Skills</a></li>
       <span class="dot"></span>
       <li><a href="#work">Experience</a></li>
     </ul>
-    <div class="nav-logo a2">
+    <div class="nav-logo" id="nav-logo">
       <img src="assets/logo.png" alt="SS" />
     </div>
-    <ul class="nav-right">
+    <ul class="nav-right" id="nav-right">
       <li><a href="#shop">Projects</a></li>
       <span class="dot"></span>
       <li><a href="#contact">Contact</a></li>
@@ -259,20 +34,15 @@
   <!-- HERO -->
   <section class="hero">
 
-    <!-- SACHIN: last letter N flush to photo left edge, at neck height -->
-    <span class="name-word name-sachin a4">SACHIN</span>
+    <span class="name-word name-sachin" id="name-sachin">SACHIN</span>
 
-    <!-- Photo: z-index 3, sits over the overlapping letters -->
-    <div class="hero-image-wrap a2">
+    <div class="hero-image-wrap" id="hero-photo">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
-    <!-- SHRESTHA: first letter S flush to photo right edge, at chest height -->
-    <span class="name-word name-shrestha a4">SHRESTHA</span>
+    <span class="name-word name-shrestha" id="name-shrestha">SHRESTHA</span>
 
-    <div class="slide-dot a3"><span></span></div>
-
-    <div class="scroll-hint a5">
+    <div class="scroll-hint" id="scroll-hint">
       <span class="scroll-line"></span>
       Scroll
     </div>
@@ -280,34 +50,64 @@
   </section>
 
   <script>
+    /* ── Cursor ── */
     const dot  = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
-    let mx=0,my=0,rx=0,ry=0;
+    let mx=0, my=0, rx=0, ry=0;
 
-    document.addEventListener('mousemove', e=>{
-      mx=e.clientX; my=e.clientY;
-      dot.style.left=mx+'px'; dot.style.top=my+'px';
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
     });
-    (function raf(){
-      rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
-      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    (function raf() {
+      rx += (mx - rx) * 0.1;
+      ry += (my - ry) * 0.1;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
       requestAnimationFrame(raf);
     })();
-
-    document.querySelectorAll('a,button').forEach(el=>{
-      el.addEventListener('mouseenter',()=>{
-        dot.style.transform='translate(-50%,-50%) scale(2.5)';
-        ring.style.width='52px'; ring.style.height='52px';
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.width    = '52px';
+        ring.style.height   = '52px';
       });
-      el.addEventListener('mouseleave',()=>{
-        dot.style.transform='translate(-50%,-50%) scale(1)';
-        ring.style.width='34px'; ring.style.height='34px';
+      el.addEventListener('mouseleave', () => {
+        dot.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.width    = '34px';
+        ring.style.height   = '34px';
       });
     });
 
-    window.addEventListener('scroll',()=>{
+    /* ── Scroll nav ── */
+    window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    /* ══════════════════════════════════
+       TIMED REVEAL SEQUENCE
+       0.2s  — photo
+       2.2s  — logo      (photo + 2s)
+       3.2s  — nav links (logo  + 1s)
+       4.2s  — names     (links + 1s)
+       4.8s  — scroll hint
+    ══════════════════════════════════ */
+    function reveal(id, delay) {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('visible');
+      }, delay);
+    }
+
+    reveal('hero-photo',     200);
+    reveal('nav-logo',      1000);
+    reveal('nav-left',      1200);
+    reveal('nav-right',     1200);
+    reveal('name-sachin',   200);
+    reveal('name-shrestha', 200);
+    reveal('scroll-hint',   2000);
   </script>
+
 </body>
 </html>
