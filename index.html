@@ -61,7 +61,6 @@
       z-index: 200;
       background: var(--bg);
       height: 88px;
-      /* ✅ REMOVED border-bottom */
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
@@ -105,7 +104,6 @@
     .nav-left li a:hover,
     .nav-right li a:hover { opacity: 1; }
 
-    /* ✅ dot — smaller, like image 2 */
     .nav-left .dot,
     .nav-right .dot {
       width: 3px; height: 3px;
@@ -128,6 +126,9 @@
       display: block;
     }
 
+    /* ════════════════════════════
+       HERO
+    ════════════════════════════ */
     .hero {
       position: relative;
       width: 100vw;
@@ -141,6 +142,7 @@
       padding-top: 88px;
     }
 
+    /* portrait */
     .hero-image-wrap {
       position: relative;
       width: 340px;
@@ -166,56 +168,66 @@
       pointer-events: none;
     }
 
-    /* ── BIG NAME ── */
+    /* ════════════════════════════
+       NAME — split overlay style
+       SACHIN  left of photo
+       SHRESTHA right of photo
+    ════════════════════════════ */
     .hero-name {
       position: absolute;
-      bottom: 36px; left: 0; right: 0;
-      text-align: center;
-      z-index: 3;
+      /* vertically centered on photo, slightly below middle */
+      top: 50%;
+      left: 0; right: 0;
+      transform: translateY(10%);
+      z-index: 5;        /* above photo */
       pointer-events: none;
       user-select: none;
-      white-space: nowrap;
     }
+
     .name-row {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: center;
-      line-height: 1;
-      gap: 16px;
+      gap: 0;
+      /* photo is 340px wide, name spans full width */
+      width: 100%;
     }
 
-    /* ✅ Roxborough CF for name */
-    .name-serif {
-      font-family: 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: clamp(70px, 11vw, 150px);
-      color: var(--fg);
-      letter-spacing: -0.01em;
-    }
-
+    /* shared name style */
+    .name-serif,
     .name-sans {
-      font-family: 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
+      font-family: 'Bodoni Moda', 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
       font-style: normal;
-      font-weight: 400;
-      font-size: clamp(70px, 11vw, 150px);
+      font-weight: 500;
+      font-size: clamp(52px, 7.5vw, 112px);
       color: var(--fg);
-      letter-spacing: -0.02em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;          /* ✅ ALL CAPS */
+      line-height: 1;
+      white-space: nowrap;
     }
 
-    .slide-num {
-      position: absolute;
-      left: 52px; top: 50%;
-      transform: translateY(-50%);
-      display: flex; align-items: center; gap: 14px;
-      font-size: 11px; letter-spacing: 0.15em;
-      color: var(--muted); z-index: 10;
-    }
-    .slide-num::after {
-      content: ''; width: 52px; height: 1px;
-      background: var(--muted); display: block;
+    /* SACHIN — pushed left, overlaps left side of photo */
+    .name-serif {
+      text-align: right;
+      flex: 1;
+      padding-right: 20px;               /* slight gap before photo center */
     }
 
+    /* SHRESTHA — pushed right, overlaps right side of photo */
+    .name-sans {
+      text-align: left;
+      flex: 1;
+      padding-left: 20px;
+    }
+
+    /* spacer = photo width so names split around it */
+    .name-photo-gap {
+      width: 340px;
+      flex-shrink: 0;
+    }
+
+    /* slide dot right */
     .slide-dot {
       position: absolute;
       right: 64px; top: 50%;
@@ -233,6 +245,7 @@
       background: var(--fg); border-radius: 50%;
     }
 
+    /* scroll hint */
     .scroll-hint {
       position: absolute;
       bottom: 24px; left: 52px; z-index: 10;
@@ -272,11 +285,12 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
+  <!-- ═══ NAV ═══ -->
   <nav id="navbar" class="a1">
     <ul class="nav-left">
       <li><a href="#about">Skills</a></li>
       <span class="dot"></span>
-      <li><a href="#work">Projects</a></li>
+      <li><a href="#work">Experience</a></li>
     </ul>
 
     <div class="nav-logo a2">
@@ -284,21 +298,27 @@
     </div>
 
     <ul class="nav-right">
-      <li><a href="#shop">Experience</a></li>
+      <li><a href="#shop">Projects</a></li>
       <span class="dot"></span>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
+  <!-- ═══ HERO ═══ -->
   <section class="hero">
 
+    <div class="slide-dot a3"><span></span></div>
+
+    <!-- Portrait -->
     <div class="hero-image-wrap a2">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
+    <!-- ✅ Name split across photo — SACHIN left | SHRESTHA right -->
     <div class="hero-name a4">
       <div class="name-row">
         <span class="name-serif">Sachin</span>
+        <div class="name-photo-gap"></div>
         <span class="name-sans">Shrestha</span>
       </div>
     </div>
