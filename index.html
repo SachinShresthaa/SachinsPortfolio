@@ -10,7 +10,10 @@
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+@font-face {
+    font-family: 'Theater';
+    src: url('./font/Theaterv04_Bold.ttf') format('truetype');
+}
     :root {
       --bg: #EEEEEE;
       --fg: #0a0a0a;
@@ -71,10 +74,10 @@
     .nav-left li a, .nav-right li a {
       text-decoration: none;
       font-family: 'Inter', sans-serif;
-      font-size: 11px; font-weight: 400;
+      font-size: 17px; font-weight: 400;
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--fg); opacity: 0.45; padding: 0 20px;
-      transition: opacity 0.2s;
+      transition: opacity 0.1s;
     }
     .nav-left li a:hover, .nav-right li a:hover { opacity: 1; }
     .nav-left .dot, .nav-right .dot {
@@ -146,23 +149,23 @@
     .name-word {
       position: absolute;
       z-index: 2;                    /* behind photo */
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 300;
+      font-family: 'Theater', sans-serif;
+      font-weight: 500;
       font-style: normal;
       text-transform: uppercase;
       color: var(--fg);
       letter-spacing: 0.05em;
       line-height: 1;
       white-space: nowrap;
-      font-size: clamp(56px, 8vw, 120px);
+      font-size: clamp(20px, 6vw, 120px);
     }
 
     /* SACHIN — text RIGHT edge flush to photo LEFT edge
        "N" is the last char → it kisses the photo left side
        vertical: upper (neck area) */
     .name-sachin {
-      right: calc(50% + 170px);     /* photo left edge */
-      top: calc(50% - 10px);        /* neck height */
+      right: calc(44.5% + 170px);     /* photo left edge */
+      top: calc(45.5% - 30px);        /* neck height */
       transform: translateY(-50%);
       text-align: right;
     }
@@ -171,7 +174,7 @@
        "S" is the first char → it kisses the photo right side
        vertical: lower (chest area) */
     .name-shrestha {
-      left: calc(50% + 170px);      /* photo right edge */
+      left: calc(43% + 170px);      /* photo right edge */
       top: calc(50% + 55px);        /* chest height — lower */
       transform: translateY(-50%);
       text-align: left;
