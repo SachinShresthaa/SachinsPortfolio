@@ -14,20 +14,25 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
+  <!-- ✅ BLACK BAR — added -->
+  <div id="hover-bar">
+    <span id="hover-bar-text"></span>
+  </div>
+
   <!-- NAV -->
   <nav id="navbar">
     <ul class="nav-left" id="nav-left">
-      <li><a href="#about">Skills</a></li>
+      <li><a href="#about" data-label="Skills">Skills</a></li>
       <span class="dot"></span>
-      <li><a href="#work">Experience</a></li>
+      <li><a href="#work" data-label="Experience">Experience</a></li>
     </ul>
-    <div class="nav-logo" id="nav-logo">
+    <div class="nav-logo" id="nav-logo" data-label="Home">
       <img src="assets/logo.png" alt="SS" />
     </div>
     <ul class="nav-right" id="nav-right">
-      <li><a href="#shop">Projects</a></li>
+      <li><a href="#shop" data-label="Projects">Projects</a></li>
       <span class="dot"></span>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" data-label="Contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -41,11 +46,6 @@
     </div>
 
     <span class="name-word name-shrestha" id="name-shrestha">SHRESTHA</span>
-
-    <div class="scroll-hint" id="scroll-hint">
-      <span class="scroll-line"></span>
-      Scroll
-    </div>
 
   </section>
 
@@ -85,14 +85,7 @@
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    /* ══════════════════════════════════
-       TIMED REVEAL SEQUENCE
-       0.2s  — photo
-       2.2s  — logo      (photo + 2s)
-       3.2s  — nav links (logo  + 1s)
-       4.2s  — names     (links + 1s)
-       4.8s  — scroll hint
-    ══════════════════════════════════ */
+    /* ── Reveal sequence ── */
     function reveal(id, delay) {
       setTimeout(() => {
         const el = document.getElementById(id);
@@ -104,9 +97,30 @@
     reveal('nav-logo',      1000);
     reveal('nav-left',      1200);
     reveal('nav-right',     1200);
-    reveal('name-sachin',   200);
-    reveal('name-shrestha', 200);
+    reveal('name-sachin',    200);
+    reveal('name-shrestha',  200);
     reveal('scroll-hint',   2000);
+
+    /* ✅ BLACK BAR HOVER — added */
+    const bar     = document.getElementById('hover-bar');
+    const barText = document.getElementById('hover-bar-text');
+
+    function showBar(label) {
+      barText.textContent = label;
+      bar.classList.add('active');
+    }
+    function hideBar() {
+      bar.classList.remove('active');
+    }
+
+    document.querySelectorAll('.nav-left a, .nav-right a').forEach(a => {
+      a.addEventListener('mouseenter', () => showBar(a.dataset.label));
+      a.addEventListener('mouseleave', hideBar);
+    });
+
+    const logo = document.getElementById('nav-logo');
+    logo.addEventListener('mouseenter', () => showBar(logo.dataset.label));
+    logo.addEventListener('mouseleave', hideBar);
   </script>
 
 </body>

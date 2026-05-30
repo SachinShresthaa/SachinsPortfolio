@@ -40,12 +40,10 @@ html, body {
 }
 
 /* ══════════════════════════════════
-   REVEAL SYSTEM — only opacity changes
-   Sizes, positions, fonts: UNCHANGED
+   REVEAL SYSTEM
 ══════════════════════════════════ */
 .nav-left,
 .nav-right,
-.nav-logo,
 .hero-image-wrap,
 .name-word,
 .scroll-hint {
@@ -54,11 +52,22 @@ html, body {
 }
 .nav-left.visible,
 .nav-right.visible,
-.nav-logo.visible,
 .hero-image-wrap.visible,
 .name-word.visible,
 .scroll-hint.visible {
   opacity: 1;
+}
+
+/* logo slides up */
+.nav-logo {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-logo.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ════ NAV ════ */
@@ -99,14 +108,8 @@ nav.scrolled {
   border-radius: 50%; flex-shrink: 0;
 }
 .nav-logo {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
-              transform 0.9s cubic-bezier(0.16,1,0.3,1);
-}
-.nav-logo.visible {
-  opacity: 1;
-  transform: translateY(0);   /* slides to natural position */
+  display: flex; align-items: center;
+  justify-content: center; padding: 0 24px;
 }
 .nav-logo img {
   width: 200px; height: 200px;
@@ -171,7 +174,6 @@ nav.scrolled {
   top: calc(52% - 30px);
   transform: translateY(-50%);
   text-align: right;
-  
 }
 .name-shrestha {
   left: calc(42.8% + 170px);
@@ -215,7 +217,6 @@ nav.scrolled {
   50%      { transform: scaleY(0.3); opacity: 0.2; }
 }
 
-/* ── Old animation classes kept (unused but harmless) ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -231,4 +232,37 @@ body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ════ HOVER BAR ════ */
+#hover-bar {
+  position: fixed;
+  top: 88px;
+  left: 0; right: 0;
+  height: 110px;
+  background: transparent;         /* no background */
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform: translateY(-20px);    /* slides down from slightly above */
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1),
+              opacity   0.35s ease;
+  pointer-events: none;
+}
+#hover-bar.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+#hover-bar-text {
+  font-family: 'Theater', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);                /* fully visible black text */
+  user-select: none;
+  white-space: nowrap;
 }
