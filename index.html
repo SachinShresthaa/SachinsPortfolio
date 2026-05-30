@@ -15,6 +15,7 @@
       --bg: #EEEEEE;
       --fg: #0a0a0a;
       --muted: rgba(10,10,10,0.38);
+      --photo-w: 340px;   /* photo width — change once if you resize photo */
     }
 
     html, body {
@@ -26,7 +27,7 @@
       cursor: none;
     }
 
-    /* ── cursor ── */
+    /* cursor */
     #cursor-dot {
       position: fixed; top: 0; left: 0;
       width: 8px; height: 8px;
@@ -89,25 +90,27 @@
       width: 200px; height: 200px;
       object-fit: contain;
       filter: brightness(0) opacity(0.82);
-      display: block;
     }
 
     /* ════ HERO ════ */
     .hero {
       position: relative;
-      width: 100vw; min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
       background: var(--bg);
       padding-top: 88px;
     }
 
-    /* portrait */
+    /* ── portrait ── */
     .hero-image-wrap {
       position: relative;
-      width: 340px; height: 490px;
-      z-index: 3;                    /* above name words */
+      width: var(--photo-w);
+      height: 490px;
+      z-index: 3;          /* photo ON TOP of name words */
       flex-shrink: 0;
     }
     .hero-image-wrap img {
@@ -127,54 +130,58 @@
       pointer-events: none;
     }
 
-    /* ════════════════════════════════════
-       NAME WORDS — absolutely positioned
-       Each one placed precisely to TOUCH
-       the photo edge at different heights
-    ════════════════════════════════════ */
+    /* ════════════════════════════════════════════
+       KEY IDEA:
+       The hero is a flex row. Photo sits in center.
+       SACHIN is absolutely positioned so its RIGHT
+       edge = the photo's LEFT edge  (N touches photo)
+       SHRESTHA is absolutely positioned so its LEFT
+       edge = the photo's RIGHT edge (S touches photo)
 
-    /* shared style */
+       Photo center = 50vw
+       Photo left   = 50vw - 170px
+       Photo right  = 50vw + 170px
+    ════════════════════════════════════════════ */
+
     .name-word {
       position: absolute;
       z-index: 2;                    /* behind photo */
-      font-family: 'Cormorant Garamond', 'Didot', Georgia, serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 300;
       font-style: normal;
       text-transform: uppercase;
       color: var(--fg);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       line-height: 1;
       white-space: nowrap;
-      /* huge — span most of left/right half */
-      font-size: clamp(60px, 8.5vw, 130px);
+      font-size: clamp(56px, 8vw, 120px);
     }
 
-    /*
-      SACHIN — right-aligned, touches RIGHT edge of photo
-      Photo center ≈ 50vw, photo left edge ≈ 50vw - 170px
-      We position from right so text's right edge = photo's left edge
-      vertical: upper area (neck level)
-    */
+    /* SACHIN — text RIGHT edge flush to photo LEFT edge
+       "N" is the last char → it kisses the photo left side
+       vertical: upper (neck area) */
     .name-sachin {
-      right: calc(50% + 152px);      /* text right edge kisses photo left */
-      top: calc(50% - 30px);         /* neck height — upper */
+      right: calc(50% + 170px);     /* photo left edge */
+      top: calc(50% - 10px);        /* neck height */
+      transform: translateY(-50%);
       text-align: right;
     }
 
-    /*
-      SHRESTHA — left-aligned, touches LEFT edge of photo
-      vertical: lower area (chest level)
-    */
+    /* SHRESTHA — text LEFT edge flush to photo RIGHT edge
+       "S" is the first char → it kisses the photo right side
+       vertical: lower (chest area) */
     .name-shrestha {
-      left: calc(50% + 152px);       /* text left edge kisses photo right */
-      top: calc(50% + 60px);         /* chest height — lower */
+      left: calc(50% + 170px);      /* photo right edge */
+      top: calc(50% + 55px);        /* chest height — lower */
+      transform: translateY(-50%);
       text-align: left;
     }
 
     /* slide dot */
     .slide-dot {
       position: absolute;
-      right: 64px; top: 38%;
+      right: 48px;
+      top: 42%;
       z-index: 10;
     }
     .slide-dot span {
@@ -191,7 +198,7 @@
     /* scroll hint */
     .scroll-hint {
       position: absolute;
-      bottom: 24px; left: 52px; z-index: 10;
+      bottom: 28px; left: 52px; z-index: 10;
       display: flex; align-items: center; gap: 10px;
       font-size: 10px; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--muted);
@@ -206,9 +213,9 @@
       50%      { transform: scaleY(0.3); opacity: 0.2; }
     }
 
-    /* fade-up */
+    /* animations */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .a1 { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
@@ -249,18 +256,18 @@
   <!-- HERO -->
   <section class="hero">
 
-    <div class="slide-dot a3"><span></span></div>
-
-    <!-- SACHIN — left, at neck level, z-index behind photo -->
+    <!-- SACHIN: last letter N flush to photo left edge, at neck height -->
     <span class="name-word name-sachin a4">SACHIN</span>
 
-    <!-- Portrait — z-index above words so they peek from sides -->
+    <!-- Photo: z-index 3, sits over the overlapping letters -->
     <div class="hero-image-wrap a2">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
-    <!-- SHRESTHA — right, at chest level, z-index behind photo -->
+    <!-- SHRESTHA: first letter S flush to photo right edge, at chest height -->
     <span class="name-word name-shrestha a4">SHRESTHA</span>
+
+    <div class="slide-dot a3"><span></span></div>
 
     <div class="scroll-hint a5">
       <span class="scroll-line"></span>
