@@ -234,62 +234,70 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-/* ════ HOVER BAR — centered in page ════ */
+/* ════ HOVER BAR — splits open from center ════ */
+
+/* wrapper — fixed center, zero height, clips the two halves */
 #hover-bar {
   position: fixed;
-  top: 50%;                        /* middle of the page */
+  top: 59%;
   left: 0; right: 0;
   height: 130px;
-  background: #0a0a0a;
+  transform: translateY(-90%);
   z-index: 150;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  transform: translateY(-50%) scale(0.94);
-  opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
-              opacity   0.4s ease;
   pointer-events: none;
-}
-#hover-bar.active {
-  transform: translateY(-50%) scale(1);
-  opacity: 1;
+  overflow: hidden;   /* clips halves while they animate */
 }
 
-/* wavy lines above and below text */
-#hover-bar::before,
-#hover-bar::after {
-  content: '';
+/* top half — starts at center (translateY 0), opens by sliding UP */
+#hover-bar .bar-top {
   position: absolute;
-  left: 0; right: 0;
-  height: 1.5px;
-  background: var(--fg);
-  clip-path: none;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: #0a0a0a;
+  transform-origin: bottom center;  /* grows from bottom edge (center) */
+  transform: scaleY(0);             /* closed — zero height at center */
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  overflow: hidden;
 }
-#hover-bar::before { top: 12px; }
-#hover-bar::after  { bottom: 12px; }
 
-/* SVG wavy lines sit inside the bar */
-#hover-bar svg {
+/* bottom half — starts at center, opens by sliding DOWN */
+#hover-bar .bar-bot {
   position: absolute;
-  left: 0; right: 0;
-  width: 100%;
-  pointer-events: none;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: #0a0a0a;
+  transform-origin: top center;     /* grows from top edge (center) */
+  transform: scaleY(0);             /* closed — zero height at center */
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  overflow: hidden;
 }
-#hover-bar svg.line-top  { top: 8px; }
-#hover-bar svg.line-bot  { bottom: 8px; }
 
+/* OPEN — both halves scale out from center */
+#hover-bar.active .bar-top {
+  transform: scaleY(1);
+}
+#hover-bar.active .bar-bot {
+  transform: scaleY(1);
+}
+
+/* text — perfectly centered, no offset */
 #hover-bar-text {
+  position: absolute;
+  top: 58%; left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
   font-family: 'Theater', 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(52px, 7.5vw, 110px);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #d4d1d1;
+  color: #c2c1c1;
   user-select: none;
   white-space: nowrap;
-  position: relative;
-  z-index: 2;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.15s ease 0.3s;
+}
+#hover-bar.active #hover-bar-text {
+  opacity: 1;
 }
