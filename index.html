@@ -6,7 +6,7 @@
   <title>Sachin Shrestha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,20 +17,11 @@
       --muted: rgba(10,10,10,0.38);
     }
 
-    /* ── Roxborough CF ── */
-    @font-face {
-      font-family: 'Roxborough CF';
-      src: url('https://db.onlinewebfonts.com/t/9c0f1f68e67f6e4f0cdde7e39cf527d2.woff2') format('woff2'),
-           url('https://db.onlinewebfonts.com/t/9c0f1f68e67f6e4f0cdde7e39cf527d2.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     html, body {
       width: 100%;
       background: var(--bg);
       color: var(--fg);
-      font-family: "Roxborough CF";
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
       cursor: none;
     }
@@ -53,9 +44,7 @@
       transition: width 0.2s, height 0.2s;
     }
 
-    /* ════════════════════════════
-       NAV
-    ════════════════════════════ */
+    /* ════ NAV ════ */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 200;
@@ -66,77 +55,49 @@
       align-items: center;
       padding: 0 60px;
     }
-
     nav.scrolled {
       background: rgba(238,238,238,0.93);
       backdrop-filter: blur(18px);
     }
-
     .nav-left {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      list-style: none;
-      gap: 0;
+      display: flex; align-items: center;
+      justify-content: flex-end; list-style: none;
     }
-
     .nav-right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      list-style: none;
-      gap: 0;
+      display: flex; align-items: center;
+      justify-content: flex-start; list-style: none;
     }
-
-    .nav-left li a,
-    .nav-right li a {
+    .nav-left li a, .nav-right li a {
       text-decoration: none;
       font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--fg);
-      opacity: 0.45;
-      padding: 0 20px;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--fg); opacity: 0.45; padding: 0 20px;
       transition: opacity 0.2s;
     }
-    .nav-left li a:hover,
-    .nav-right li a:hover { opacity: 1; }
-
-    .nav-left .dot,
-    .nav-right .dot {
+    .nav-left li a:hover, .nav-right li a:hover { opacity: 1; }
+    .nav-left .dot, .nav-right .dot {
       width: 3px; height: 3px;
       background: rgba(10,10,10,0.28);
-      border-radius: 50%;
-      flex-shrink: 0;
+      border-radius: 50%; flex-shrink: 0;
     }
-
     .nav-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 24px;
+      display: flex; align-items: center;
+      justify-content: center; padding: 0 24px;
     }
     .nav-logo img {
-      width: 200px;
-      height: 200px;
+      width: 200px; height: 200px;
       object-fit: contain;
       filter: brightness(0) opacity(0.82);
       display: block;
     }
 
-    /* ════════════════════════════
-       HERO
-    ════════════════════════════ */
+    /* ════ HERO ════ */
     .hero {
       position: relative;
-      width: 100vw;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      width: 100vw; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       overflow: hidden;
       background: var(--bg);
       padding-top: 88px;
@@ -145,9 +106,9 @@
     /* portrait */
     .hero-image-wrap {
       position: relative;
-      width: 340px;
-      height: 490px;
-      z-index: 2;
+      width: 340px; height: 490px;
+      z-index: 3;                    /* above name words */
+      flex-shrink: 0;
     }
     .hero-image-wrap img {
       width: 100%; height: 100%;
@@ -157,9 +118,7 @@
       filter: grayscale(100%) contrast(1.08);
       transition: filter 0.7s ease;
     }
-    .hero-image-wrap img:hover {
-      filter: grayscale(0%) contrast(1.05);
-    }
+    .hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
     .hero-image-wrap::after {
       content: '';
       position: absolute;
@@ -168,74 +127,58 @@
       pointer-events: none;
     }
 
-    /* ════════════════════════════
-       NAME — split overlay style
-       SACHIN  left of photo
-       SHRESTHA right of photo
-    ════════════════════════════ */
-    .hero-name {
+    /* ════════════════════════════════════
+       NAME WORDS — absolutely positioned
+       Each one placed precisely to TOUCH
+       the photo edge at different heights
+    ════════════════════════════════════ */
+
+    /* shared style */
+    .name-word {
       position: absolute;
-      /* vertically centered on photo, slightly below middle */
-      top: 50%;
-      left: 0; right: 0;
-      transform: translateY(10%);
-      z-index: 5;        /* above photo */
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .name-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      /* photo is 340px wide, name spans full width */
-      width: 100%;
-    }
-
-    /* shared name style */
-    .name-serif,
-    .name-sans {
-      font-family: 'Bodoni Moda', 'Roxborough CF', 'Cormorant Garamond', Georgia, serif;
+      z-index: 2;                    /* behind photo */
+      font-family: 'Cormorant Garamond', 'Didot', Georgia, serif;
+      font-weight: 300;
       font-style: normal;
-      font-weight: 500;
-      font-size: clamp(52px, 7.5vw, 112px);
+      text-transform: uppercase;
       color: var(--fg);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;          /* ✅ ALL CAPS */
+      letter-spacing: 0.04em;
       line-height: 1;
       white-space: nowrap;
+      /* huge — span most of left/right half */
+      font-size: clamp(60px, 8.5vw, 130px);
     }
 
-    /* SACHIN — pushed left, overlaps left side of photo */
-    .name-serif {
+    /*
+      SACHIN — right-aligned, touches RIGHT edge of photo
+      Photo center ≈ 50vw, photo left edge ≈ 50vw - 170px
+      We position from right so text's right edge = photo's left edge
+      vertical: upper area (neck level)
+    */
+    .name-sachin {
+      right: calc(50% + 152px);      /* text right edge kisses photo left */
+      top: calc(50% - 30px);         /* neck height — upper */
       text-align: right;
-      flex: 1;
-      padding-right: 20px;               /* slight gap before photo center */
     }
 
-    /* SHRESTHA — pushed right, overlaps right side of photo */
-    .name-sans {
+    /*
+      SHRESTHA — left-aligned, touches LEFT edge of photo
+      vertical: lower area (chest level)
+    */
+    .name-shrestha {
+      left: calc(50% + 152px);       /* text left edge kisses photo right */
+      top: calc(50% + 60px);         /* chest height — lower */
       text-align: left;
-      flex: 1;
-      padding-left: 20px;
     }
 
-    /* spacer = photo width so names split around it */
-    .name-photo-gap {
-      width: 340px;
-      flex-shrink: 0;
-    }
-
-    /* slide dot right */
+    /* slide dot */
     .slide-dot {
       position: absolute;
-      right: 64px; top: 50%;
-      transform: translateY(-50%);
+      right: 64px; top: 38%;
       z-index: 10;
     }
     .slide-dot span {
-      width: 30px; height: 30px;
+      width: 28px; height: 28px;
       border: 1.5px solid rgba(10,10,10,0.2);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -263,6 +206,7 @@
       50%      { transform: scaleY(0.3); opacity: 0.2; }
     }
 
+    /* fade-up */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -285,18 +229,16 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- ═══ NAV ═══ -->
+  <!-- NAV -->
   <nav id="navbar" class="a1">
     <ul class="nav-left">
       <li><a href="#about">Skills</a></li>
       <span class="dot"></span>
       <li><a href="#work">Experience</a></li>
     </ul>
-
     <div class="nav-logo a2">
       <img src="assets/logo.png" alt="SS" />
     </div>
-
     <ul class="nav-right">
       <li><a href="#shop">Projects</a></li>
       <span class="dot"></span>
@@ -304,24 +246,21 @@
     </ul>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- HERO -->
   <section class="hero">
 
     <div class="slide-dot a3"><span></span></div>
 
-    <!-- Portrait -->
+    <!-- SACHIN — left, at neck level, z-index behind photo -->
+    <span class="name-word name-sachin a4">SACHIN</span>
+
+    <!-- Portrait — z-index above words so they peek from sides -->
     <div class="hero-image-wrap a2">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
 
-    <!-- ✅ Name split across photo — SACHIN left | SHRESTHA right -->
-    <div class="hero-name a4">
-      <div class="name-row">
-        <span class="name-serif">Sachin</span>
-        <div class="name-photo-gap"></div>
-        <span class="name-sans">Shrestha</span>
-      </div>
-    </div>
+    <!-- SHRESTHA — right, at chest level, z-index behind photo -->
+    <span class="name-word name-shrestha a4">SHRESTHA</span>
 
     <div class="scroll-hint a5">
       <span class="scroll-line"></span>
