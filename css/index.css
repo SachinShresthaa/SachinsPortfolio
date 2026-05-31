@@ -128,7 +128,7 @@ nav.scrolled {
   justify-content: center;
   overflow: hidden;
   background: var(--bg);
-  padding-top: 88px;
+  padding-top: 0px;
 }
 
 /* ── portrait ── */
@@ -172,13 +172,13 @@ nav.scrolled {
 }
 .name-sachin {
   right: calc(44.5% + 170px);
-  top: calc(52% - 30px);
+  top: calc(47% - 30px);
   transform: translateY(-50%);
   text-align: right;
 }
 .name-shrestha {
   left: calc(42.8% + 170px);
-  top: calc(55% + 55px);
+  top: calc(50.5% + 55px);
   transform: translateY(-50%);
   text-align: left;
 }
@@ -238,9 +238,9 @@ body::before {
 /* ════ HOVER BAR ════ */
 #hover-bar {
   position: fixed;
-  top: 59%;
+  top: 55%;
   left: 0; right: 0;
-  height: 130px;
+  height: 150px;
   transform: translateY(-90%);
   z-index: 150;
   pointer-events: none;
@@ -273,11 +273,11 @@ body::before {
 /* ── Text wrapper ── */
 #hover-bar-text {
   position: absolute;
-  top: 58%; left: 50%;
+  top: 62%; left: 50%;
   transform: translate(-50%, -50%);
-  line-height: 1;
+  line-height:1;
   font-family: 'Theater', 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(52px, 7.5vw, 110px);
+  font-size: clamp(70px, 11vw, 170px);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
