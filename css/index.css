@@ -297,8 +297,8 @@ body::before {
   display: block;
   transform-origin: bottom center;
   transform: scaleY(0);
-  /* ✅ open slower than bar */
-  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s;
+  /* slower open */
+  transition: transform 1.4s cubic-bezier(0.16,1,0.3,1) 0.3s;
 }
 
 /* Text split — bottom half */
@@ -313,8 +313,8 @@ body::before {
   margin-top: -0.42em;
   transform-origin: top center;
   transform: scaleY(0);
-  /* ✅ open slower than bar */
-  transition: transform 0.1s cubic-bezier(0.16,1,0.3,1) 0.2s;
+  /* slower open */
+  transition: transform 1.4s cubic-bezier(0.16,1,0.3,1) 0.3s;
 }
 
 /* OPEN */
@@ -323,8 +323,38 @@ body::before {
 
 /* ✅ CLOSE — text snaps away faster than bar */
 #hover-bar:not(.active) .txt-top span {
-  transition: transform 0.12s ease 0s;
+  transition: transform 0.06s ease 0s;
 }
 #hover-bar:not(.active) .txt-bot span {
-  transition: transform 0.12s ease 0s;
+  transition: transform 0.06s ease 0s;
+}
+
+/* ════ PAGE TRANSITION — click expands bar fullscreen ════ */
+
+/* fullscreen state — bar expands to cover whole viewport */
+#hover-bar.fullscreen {
+  top: 0 !important;
+  height: 100vh !important;
+  transform: none !important;
+  transition: top 0.7s cubic-bezier(0.16,1,0.3,1),
+              height 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* text turns full white when fullscreen */
+#hover-bar.fullscreen #hover-bar-text {
+  color: #ffffff !important;
+  transition: color 0.4s ease 0.3s;
+}
+
+/* text stays visible (no split close) during fullscreen */
+#hover-bar.fullscreen .txt-top span,
+#hover-bar.fullscreen .txt-bot span {
+  transform: scaleY(1) !important;
+  transition: none !important;
+}
+
+/* sweep-up — whole bar slides off screen upward */
+#hover-bar.sweep-up {
+  transform: translateY(-100%) !important;
+  transition: transform 0.7s cubic-bezier(0.7,0,1,0.5) !important;
 }
