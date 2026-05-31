@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONTACT — Sachin Shrestha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/page.css" />
+</head>
+<body>
+
+  <!-- PAGE CONTENT -->
+  <section class="page-hero">
+    <span class="name-word page-title" id="page-title">CONTACT</span>
+  </section>
+
+  <!-- shared header (cursor + hover-bar + nav) -->
+  <script src="js/header.js"></script>
+  <!-- shared cursor behaviour -->
+  <script src="js/cursor.js"></script>
+  <!-- shared page transition -->
+  <script src="js/transition.js"></script>
+
+  <script>
+    function reveal(id, delay) {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('visible');
+      }, delay);
+    }
+    reveal('nav-logo',    900);
+    reveal('nav-left',   1100);
+    reveal('nav-right',  1100);
+    reveal('page-title', 900);
+  </script>
+
+</body>
+</html>
