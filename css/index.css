@@ -80,7 +80,7 @@ nav {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 60px;
-  padding-top: 1cm;              /* 1cm space above nav content */
+  padding-top: 1cm;
 }
 nav.scrolled {
   background: rgba(238,238,238,0.93);
@@ -275,7 +275,7 @@ body::before {
   position: absolute;
   top: 62%; left: 50%;
   transform: translate(-50%, -50%);
-  line-height:1;
+  line-height: 1;
   font-family: 'Theater', 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(70px, 11vw, 170px);
   font-weight: 500;
@@ -291,13 +291,14 @@ body::before {
 #hover-bar-text .txt-top {
   display: block;
   overflow: hidden;
-  height: 0.6em;                 /* slightly taller to cover the gap */
+  height: 0.6em;
 }
 #hover-bar-text .txt-top span {
   display: block;
   transform-origin: bottom center;
   transform: scaleY(0);
-  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1) 0.05s;
+  /* ✅ open slower than bar */
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s;
 }
 
 /* Text split — bottom half */
@@ -305,16 +306,25 @@ body::before {
   display: block;
   overflow: hidden;
   height: 0.6em;
-  margin-top: -0.18em;           /* pull up to overlap — removes visible line */
+  margin-top: -0.18em;
 }
 #hover-bar-text .txt-bot span {
   display: block;
   margin-top: -0.42em;
   transform-origin: top center;
   transform: scaleY(0);
-  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1) 0.05s;
+  /* ✅ open slower than bar */
+  transition: transform 0.1s cubic-bezier(0.16,1,0.3,1) 0.2s;
 }
 
-/* OPEN — text halves expand from center */
+/* OPEN */
 #hover-bar.active .txt-top span { transform: scaleY(1); }
 #hover-bar.active .txt-bot span { transform: scaleY(1); }
+
+/* ✅ CLOSE — text snaps away faster than bar */
+#hover-bar:not(.active) .txt-top span {
+  transition: transform 0.12s ease 0s;
+}
+#hover-bar:not(.active) .txt-bot span {
+  transition: transform 0.12s ease 0s;
+}
