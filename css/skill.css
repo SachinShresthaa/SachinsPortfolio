@@ -1,0 +1,26 @@
+/* ════ SKILLS PAGE ════ */
+
+/* Hero section — same structure as index hero */
+.skills-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+  padding-top: 88px;
+}
+
+/* MY — left side, upper (same as .name-sachin position logic) */
+.skills-my {
+  right: calc(50% + 20px);
+  top: calc(48% - 20px);
+}
+
+/* SKILLS — right side, lower (same as .name-shrestha position logic) */
+.skills-title {
+  left: calc(50% + 20px);
+  top: calc(52% + 20px);
+}

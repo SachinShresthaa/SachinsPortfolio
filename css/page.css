@@ -1,0 +1,22 @@
+/* ════ SHARED PAGE STYLES ════ */
+/* Used by skills.html, experience.html, projects.html, contact.html */
+
+.page-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+  padding-top: 88px;
+}
+
+/* Page title — same .name-word style, centered */
+.page-title {
+  position: relative;   /* override absolute from .name-word */
+  transform: none;
+  text-align: center;
+  font-size: clamp(48px, 10vw, 160px);
+}
