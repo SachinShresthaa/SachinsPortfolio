@@ -11,151 +11,36 @@
 </head>
 <body>
 
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
-
-  <!-- HOVER BAR — splits open from center -->
-  <div id="hover-bar">
-    <div class="bar-top"></div>
-    <span id="hover-bar-text"></span>
-    <div class="bar-bot"></div>
-  </div>
-
-  <!-- NAV -->
-  <nav id="navbar">
-    <ul class="nav-left" id="nav-left">
-      <li><a href="#about" data-label="Skills">Skills</a></li>
-      <span class="dot"></span>
-      <li><a href="#work" data-label="Experience">Experience</a></li>
-    </ul>
-    <div class="nav-logo" id="nav-logo" data-label="Home">
-      <img src="assets/logo.png" alt="SS" />
-    </div>
-    <ul class="nav-right" id="nav-right">
-      <li><a href="#shop" data-label="Projects">Projects</a></li>
-      <span class="dot"></span>
-      <li><a href="#contact" data-label="Contact">Contact</a></li>
-    </ul>
-  </nav>
-
   <!-- HERO -->
   <section class="hero">
-
-    <span class="name-word name-sachin" id="name-sachin">SACHIN</span>
-
+    <span class="name-word name-sachin"  id="name-sachin">SACHIN</span>
     <div class="hero-image-wrap" id="hero-photo">
       <img src="assets/pp.png" alt="Sachin Shrestha" />
     </div>
-
     <span class="name-word name-shrestha" id="name-shrestha">SHRESTHA</span>
-
   </section>
 
+  <!-- shared header (cursor + hover-bar + nav) -->
+  <script src="js/header.js"></script>
+  <!-- shared cursor behaviour -->
+  <script src="js/cursor.js"></script>
+  <!-- shared page transition -->
+  <script src="js/transition.js"></script>
+
   <script>
-    /* ── Cursor ── */
-    const dot  = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    let mx=0, my=0, rx=0, ry=0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
-    (function raf() {
-      rx += (mx - rx) * 0.1;
-      ry += (my - ry) * 0.1;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(raf);
-    })();
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
-        ring.style.width    = '52px';
-        ring.style.height   = '52px';
-      });
-      el.addEventListener('mouseleave', () => {
-        dot.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.width    = '34px';
-        ring.style.height   = '34px';
-      });
-    });
-
-    /* ── Scroll nav ── */
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    /* ── Reveal sequence ── */
+    /* page-specific reveals */
     function reveal(id, delay) {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.classList.add('visible');
       }, delay);
     }
-
-    reveal('hero-photo',     200);
-    reveal('nav-logo',      1000);
-    reveal('nav-left',      1200);
-    reveal('nav-right',     1200);
-    reveal('name-sachin',    200);
-    reveal('name-shrestha',  200);
-    reveal('scroll-hint',   2000);
-
-    /* ── BLACK BAR HOVER + CLICK TRANSITION ── */
-    const bar     = document.getElementById('hover-bar');
-    const barText = document.getElementById('hover-bar-text');
-
-    function showBar(label) {
-      barText.innerHTML =
-        `<span class="txt-top"><span>${label}</span></span>` +
-        `<span class="txt-bot"><span>${label}</span></span>`;
-      bar.classList.add('active');
-    }
-    function hideBar() {
-      bar.classList.remove('active');
-      bar.classList.remove('fullscreen');
-    }
-
-    document.querySelectorAll('.nav-left a, .nav-right a').forEach(a => {
-      a.addEventListener('mouseenter', () => showBar(a.dataset.label));
-      a.addEventListener('mouseleave', hideBar);
-
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        const label = this.dataset.label;
-
-        /* make sure bar is shown first */
-        showBar(label);
-
-        /* step 1 — go fullscreen */
-        bar.classList.add('fullscreen');
-
-        /* step 2 — after 1s sweep upward then navigate */
-        setTimeout(() => {
-          bar.classList.add('sweep-up');
-          setTimeout(() => {
-            window.location.href = href;
-          }, 700);
-        }, 900);
-      });
-    });
-
-    const logo = document.getElementById('nav-logo');
-    logo.addEventListener('mouseenter', () => showBar(logo.dataset.label));
-    logo.addEventListener('mouseleave', hideBar);
-
-    logo.addEventListener('click', function(e) {
-      e.preventDefault();
-      showBar('Home');
-      bar.classList.add('fullscreen');
-      setTimeout(() => {
-        bar.classList.add('sweep-up');
-        setTimeout(() => { window.location.href = '#'; }, 700);
-      }, 900);
-    });
+    reveal('hero-photo',    200);
+    reveal('nav-logo',     1000);
+    reveal('nav-left',     1200);
+    reveal('nav-right',    1200);
+    reveal('name-sachin',   200);
+    reveal('name-shrestha', 200);
   </script>
 
 </body>
