@@ -77,11 +77,33 @@ function runEntryAnimation(label) {
 
   /* cleanup after sweep finishes */
   setTimeout(() => {
+    /* Step 1 — inline transition:none prevents the CSS 0.55s transition from
+       firing when !important is lifted in step 2.
+       scaleY(0) will take effect once the !important classes are removed. */
+    bar.querySelectorAll('.bar-top, .bar-bot').forEach(el => {
+      el.style.transition = 'none';
+      el.style.transform  = 'scaleY(0)';
+    });
+
+    /* Step 2 — remove all classes. !important is gone so inline wins:
+       transition:none stops the scaleY(1)→scaleY(0) from animating. */
     bar.classList.remove('entry-cover', 'entry-sweep', 'text-white', 'active', 'fullscreen');
     barText.classList.remove('entry-cover', 'entry-sweep', 'text-white', 'active');
     barText.style.opacity    = '';
     barText.style.transition = '';
     barText.innerHTML        = '';
+
+    /* Step 3 — reflow AFTER class removal captures scaleY(0) as the snapshot,
+       not the previous scaleY(1). */
+    bar.offsetHeight;
+
+    /* Step 4 — restore CSS. Previous snapshot is scaleY(0), CSS default is
+       also scaleY(0) → no change → no transition fires. */
+    bar.querySelectorAll('.bar-top, .bar-bot').forEach(el => {
+      el.style.transition = '';
+      el.style.transform  = '';
+    });
+
     transitioning = false;
   }, 1400);
 }

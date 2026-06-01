@@ -167,9 +167,8 @@ body::before {
 /* ══ HOVER BAR ══ */
 #hover-bar {
   position: fixed;
-  top: 55%; left: 0; right: 0;
+  top: calc(55% - 135px); left: 0; right: 0;
   height: 150px;
-  transform: translateY(-90%);
   z-index: 9999 !important;  /* above EVERYTHING including nav */
   pointer-events: none;
   overflow: hidden;
@@ -236,7 +235,6 @@ body::before {
 #hover-bar.fullscreen {
   top: 0 !important;
   height: 100vh !important;
-  transform: none !important;
   transition: top 0.7s cubic-bezier(0.16,1,0.3,1),
               height 0.7s cubic-bezier(0.16,1,0.3,1);
 }
@@ -257,7 +255,6 @@ body::before {
 #hover-bar.entry-cover {
   top: 0 !important;
   height: 100vh !important;
-  transform: none !important;
   transition: none !important;
 }
 #hover-bar.entry-cover .bar-top,
