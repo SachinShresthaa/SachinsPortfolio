@@ -221,10 +221,10 @@ body::before {
 }
 #hover-bar-text.active .txt-top span { transform: scaleY(1); }
 #hover-bar-text.active .txt-bot span { transform: scaleY(1); }
-#hover-bar-text:not(.active):not(.entry-cover):not(.entry-reveal) .txt-top span {
+#hover-bar-text:not(.active):not(.entry-cover):not(.entry-sweep) .txt-top span {
   transition: transform 0.06s ease 0s;
 }
-#hover-bar-text:not(.active):not(.entry-cover):not(.entry-reveal) .txt-bot span {
+#hover-bar-text:not(.active):not(.entry-cover):not(.entry-sweep) .txt-bot span {
   transition: transform 0.06s ease 0s;
 }
 
@@ -247,10 +247,10 @@ body::before {
   transition: transform 0.7s cubic-bezier(0.16,1,0.3,1) !important;
 }
 
-/* text turns white */
+/* text turns white — synced with bar expansion (~0.7s) */
 #hover-bar-text.text-white {
   color: #ffffff !important;
-  transition: color 0.4s ease;
+  transition: color 0.8s ease;
 }
 
 /* ══ ENTRY: bar covers screen instantly on page load ══ */
@@ -279,15 +279,15 @@ body::before {
   transition: none !important;
 }
 
-/* ══ ENTRY REVEAL: text stays, morphs to name-word size ══ */
-#hover-bar-text.entry-reveal {
-  font-size: clamp(20px, 6vw, 120px);
-  color: #0a0a0a;
-  transition: font-size 0.8s cubic-bezier(0.16,1,0.3,1),
-              color 0.4s ease;
+/* ══ ENTRY SWEEP: text rides up with bar and fades out ══ */
+#hover-bar-text.entry-sweep {
+  transform: translate(-50%, calc(-50% - 100vh)) !important;
+  opacity: 0 !important;
+  transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
-#hover-bar-text.entry-reveal .txt-top span,
-#hover-bar-text.entry-reveal .txt-bot span {
+#hover-bar-text.entry-sweep .txt-top span,
+#hover-bar-text.entry-sweep .txt-bot span {
   transform: scaleY(1) !important;
   transition: none !important;
 }

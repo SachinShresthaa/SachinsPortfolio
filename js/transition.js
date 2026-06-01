@@ -1,6 +1,7 @@
 /* ══════════════════════════════════════════════════
    SPA NAVIGATION — no page reload, no camera click
-   fetch + History API replaces window.location.href
+   Click nav → bar expands fullscreen, text slowly turns
+   white → bar + text sweep up together, text fades out
 ══════════════════════════════════════════════════ */
 
 const bar     = document.getElementById('hover-bar');
@@ -54,8 +55,7 @@ function updateNavActive(pageName) {
 
 /* ══════════════════════════════════════════════════
    ENTRY ANIMATION
-   Bar covers screen, then sweeps up.
-   Label text stays at name-word size, then fades out.
+   Bar sweeps upward. Text rides up with it and fades.
 ══════════════════════════════════════════════════ */
 function runEntryAnimation(label) {
   barText.innerHTML =
@@ -68,22 +68,17 @@ function runEntryAnimation(label) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
+      /* bar sweeps up; text rides along and fades out */
       bar.classList.add('entry-sweep');
       barText.classList.remove('entry-cover');
-      barText.classList.add('entry-reveal');
+      barText.classList.add('entry-sweep');
     });
   });
 
-  /* fade label text as page content starts appearing */
-  setTimeout(() => {
-    barText.style.opacity    = '0';
-    barText.style.transition = 'opacity 0.5s ease';
-  }, 800);
-
-  /* cleanup */
+  /* cleanup after sweep finishes */
   setTimeout(() => {
     bar.classList.remove('entry-cover', 'entry-sweep', 'text-white', 'active', 'fullscreen');
-    barText.classList.remove('entry-cover', 'entry-reveal', 'text-white', 'active');
+    barText.classList.remove('entry-cover', 'entry-sweep', 'text-white', 'active');
     barText.style.opacity    = '';
     barText.style.transition = '';
     barText.innerHTML        = '';
@@ -102,13 +97,12 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
 
   const pageName = href.split('/').pop() || 'index.html';
 
-  /* start cover animation immediately */
+  /* cover screen — bar expands + text starts turning white at the same time */
   showBar(label);
-  requestAnimationFrame(() => bar.classList.add('fullscreen'));
-  setTimeout(() => {
-    bar.classList.add('text-white');
-    barText.classList.add('text-white');
-  }, 600);
+  requestAnimationFrame(() => {
+    bar.classList.add('fullscreen');
+    barText.classList.add('text-white'); /* slow color transition synced with bar */
+  });
 
   /* fetch new page + wait for screen to be covered — in parallel */
   const coverDone = new Promise(r => setTimeout(r, 800));
