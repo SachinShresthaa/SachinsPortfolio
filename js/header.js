@@ -16,9 +16,9 @@
   document.body.insertAdjacentHTML('afterbegin', `
     <div id="hover-bar">
       <div class="bar-top"></div>
-      <span id="hover-bar-text"></span>
       <div class="bar-bot"></div>
     </div>
+    <span id="hover-bar-text"></span>
   `);
 
   /* ── Nav ── */
