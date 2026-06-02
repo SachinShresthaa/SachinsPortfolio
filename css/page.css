@@ -15,8 +15,208 @@
 
 /* Page title — same .name-word style, centered */
 .page-title {
-  position: relative;   /* override absolute from .name-word */
+  position: relative;
   transform: none;
   text-align: center;
   font-size: clamp(48px, 10vw, 160px);
 }
+
+/* ════ CONTACT PAGE ════ */
+
+.contact-hero {
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(88px + 72px) 8vw 80px;
+}
+
+.contact-grid {
+  width: 100%;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(60px, 8vw, 130px);
+  align-items: start;
+}
+
+/* ── reveal ── */
+.contact-side,
+.form-side {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-side.visible { opacity: 1; }
+.form-side.visible    { opacity: 1; transition-delay: 0.15s; }
+
+/* ── info side ── */
+.c-eyebrow {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.c-heading {
+  font-family: 'Theater', sans-serif;
+  font-size: clamp(54px, 6.5vw, 104px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--fg);
+  margin-bottom: 28px;
+}
+
+.c-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: rgba(10,10,10,0.5);
+  max-width: 300px;
+  margin-bottom: 52px;
+}
+
+.c-items { margin-bottom: 48px; }
+
+.c-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(10,10,10,0.1);
+  text-decoration: none;
+  color: var(--fg);
+  transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.c-item:first-child { border-top: 1px solid rgba(10,10,10,0.1); }
+a.c-item:hover      { padding-left: 10px; }
+
+.c-icon {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(10,10,10,0.13);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--fg);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.c-icon svg {
+  width: 14px; height: 14px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+a.c-item:hover .c-icon {
+  background: var(--fg); border-color: var(--fg); color: var(--bg);
+}
+
+.c-text          { flex: 1; min-width: 0; }
+.c-text-label    {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 3px;
+}
+.c-text-value    {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.c-socials       { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.c-social-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px 9px 13px;
+  border: 1px solid rgba(10,10,10,0.18);
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; text-decoration: none; color: var(--fg);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.c-social-pill:hover {
+  background: var(--fg); color: var(--bg); border-color: var(--fg);
+}
+.c-social-pill svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+/* ── form side ── */
+.f-eyebrow {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 36px;
+}
+
+.c-form          { display: flex; flex-direction: column; }
+
+.f-row           { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+
+.f-field         { position: relative; }
+.f-field label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--muted); padding-top: 24px; margin-bottom: 10px;
+  transition: color 0.3s;
+}
+.f-field:focus-within label { color: var(--fg); }
+
+.f-field input,
+.f-field textarea {
+  display: block; width: 100%;
+  background: none; border: none;
+  border-bottom: 1px solid rgba(10,10,10,0.14);
+  outline: none; padding: 0 0 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 400; color: var(--fg);
+  resize: none; cursor: none;
+  transition: border-color 0.3s;
+}
+.f-field input::placeholder,
+.f-field textarea::placeholder { color: rgba(10,10,10,0.22); }
+.f-field input:focus,
+.f-field textarea:focus         { border-color: var(--fg); }
+.f-field textarea               { min-height: 88px; padding-top: 4px; }
+
+.f-actions {
+  margin-top: 38px;
+  display: flex; align-items: center; gap: 22px;
+}
+
+.f-submit {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 15px 30px;
+  background: var(--fg); color: var(--bg);
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: none;
+  transition: gap 0.3s;
+}
+.f-submit:hover                 { gap: 20px; }
+.f-submit svg {
+  width: 14px; height: 14px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0; transition: transform 0.3s;
+}
+.f-submit:hover svg             { transform: translateX(4px); }
+
+.f-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
+}
+
+.f-success {
+  display: none;
+  padding: 14px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; letter-spacing: 0.08em;
+  color: var(--fg);
+}
+.f-success.show                 { display: block; }
