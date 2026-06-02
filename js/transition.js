@@ -1,9 +1,3 @@
-/* ══════════════════════════════════════════════════
-   SPA NAVIGATION — no page reload, no camera click
-   Click nav → bar expands fullscreen, text slowly turns
-   white → bar + text sweep up together, text fades out
-══════════════════════════════════════════════════ */
-
 const bar     = document.getElementById('hover-bar');
 const barText = document.getElementById('hover-bar-text');
 let transitioning = false;
@@ -115,6 +109,12 @@ function runEntryAnimation(label) {
 ══════════════════════════════════════════════════ */
 async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
   if (transitioning) return;
+
+  /* skip transition if already on the target page */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const targetPage  = href.split('/').pop() || 'index.html';
+  if (currentPage === targetPage) return;
+
   transitioning = true;
 
   const pageName = href.split('/').pop() || 'index.html';
