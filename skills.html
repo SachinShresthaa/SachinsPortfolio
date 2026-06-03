@@ -9,12 +9,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/index.css" />
   <link rel="stylesheet" href="css/page.css" />
+  <link rel="stylesheet" href="css/skill.css" />
 </head>
 <body>
 
-  <!-- PAGE CONTENT -->
-  <section class="page-hero">
-    <span class="name-word page-title" id="page-title">SKILLS</span>
+  <section class="page-hero skills-page">
+
+    <!-- ════ HERO ════ -->
+    <div class="sk-hero">
+
+      <!-- "MY" — small label top-right -->
+      <span class="name-word sk-my" id="sk-my">MY</span>
+
+      <!-- "SKILLS" — dominant hero word, bottom-left -->
+      <span class="name-word sk-word" id="sk-word">SKILLS</span>
+
+      <!-- mid-page rule -->
+      <div class="sk-rule"></div>
+
+      <!-- scroll hint -->
+      <div class="sk-scroll">
+        <div class="scroll-line"></div>
+        <span>Explore</span>
+      </div>
+
+      <!-- total count badge -->
+      <div class="sk-badge">
+        <span class="sk-badge-n" id="sk-badge-n">10</span>
+        <span class="sk-badge-l">Technologies</span>
+      </div>
+
+    </div>
+
+    <!-- ════ CONTENT ════ -->
+    <div class="sk-content" id="sk-content">
+
+      <!-- Filter tabs -->
+      <div class="sk-filters" id="sk-filters">
+        <!-- built by JS -->
+      </div>
+
+      <!-- Skills grid -->
+      <div class="sk-grid" id="sk-grid">
+        <!-- built by JS -->
+      </div>
+
+    </div>
+
   </section>
 
   <!-- shared header (cursor + hover-bar + nav) -->
@@ -25,6 +66,7 @@
   <script src="js/transition.js"></script>
 
   <script>
+    /* ── reveals ── */
     function reveal(id, delay) {
       setTimeout(() => {
         const el = document.getElementById(id);
@@ -34,7 +76,74 @@
     reveal('nav-logo',    900);
     reveal('nav-left',   1100);
     reveal('nav-right',  1100);
-    reveal('page-title', 900);
+    reveal('sk-my',       200);
+    reveal('sk-word',     200);
+    reveal('sk-content',  900);
+
+    /* ── skills data (from CV + projects) ── */
+    const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/';
+    const SKILLS = [
+      { name: 'Java',        sub: 'Language',        cat: 'language', img: CDN + 'java/java-original.svg' },
+      { name: 'JavaScript',  sub: 'Language',        cat: 'language', img: CDN + 'javascript/javascript-original.svg' },
+      { name: 'PHP',         sub: 'Language',        cat: 'language', img: CDN + 'php/php-original.svg' },
+      { name: 'C#',          sub: 'Language',        cat: 'language', img: CDN + 'csharp/csharp-original.svg' },
+      { name: 'HTML5',       sub: 'Markup',          cat: 'frontend', img: CDN + 'html5/html5-original.svg' },
+      { name: 'CSS3',        sub: 'Styling',         cat: 'frontend', img: CDN + 'css3/css3-original.svg' },
+      { name: 'MySQL',       sub: 'Database',        cat: 'database', img: CDN + 'mysql/mysql-original.svg' },
+      { name: 'Git',         sub: 'Version Control', cat: 'tools',    img: CDN + 'git/git-original.svg' },
+      { name: 'GitHub',      sub: 'VCS Platform',    cat: 'tools',    img: CDN + 'github/github-original.svg' },
+      { name: 'Figma',       sub: 'UI / UX Design',  cat: 'design',   img: CDN + 'figma/figma-original.svg' },
+    ];
+
+    const CATS = [
+      { id: 'all',      label: 'All' },
+      { id: 'language', label: 'Languages' },
+      { id: 'frontend', label: 'Frontend' },
+      { id: 'database', label: 'Database' },
+      { id: 'tools',    label: 'Tools' },
+      { id: 'design',   label: 'Design' },
+    ];
+
+    /* update badge count */
+    document.getElementById('sk-badge-n').textContent = SKILLS.length;
+
+    /* build filter tabs */
+    const filterBar = document.getElementById('sk-filters');
+    CATS.forEach(c => {
+      const count = c.id === 'all'
+        ? SKILLS.length
+        : SKILLS.filter(s => s.cat === c.id).length;
+      const btn = document.createElement('button');
+      btn.className = 'sk-tab' + (c.id === 'all' ? ' active' : '');
+      btn.dataset.cat = c.id;
+      btn.innerHTML = `${c.label.toUpperCase()} <em>${count}</em>`;
+      btn.addEventListener('click', () => setFilter(c.id));
+      filterBar.appendChild(btn);
+    });
+
+    /* build skill cards */
+    const grid = document.getElementById('sk-grid');
+    SKILLS.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'sk-card';
+      card.dataset.cat = s.cat;
+      card.innerHTML = `
+        <div class="sk-icon"><img src="${s.img}" alt="${s.name}" loading="lazy" /></div>
+        <span class="sk-name">${s.name}</span>
+        <span class="sk-sub">${s.sub}</span>
+      `;
+      grid.appendChild(card);
+    });
+
+    /* filter logic */
+    function setFilter(cat) {
+      document.querySelectorAll('.sk-tab').forEach(b =>
+        b.classList.toggle('active', b.dataset.cat === cat)
+      );
+      document.querySelectorAll('.sk-card').forEach(c =>
+        c.classList.toggle('sk-hide', cat !== 'all' && c.dataset.cat !== cat)
+      );
+    }
   </script>
 
 </body>
