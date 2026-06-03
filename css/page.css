@@ -128,7 +128,7 @@ a.c-item:hover .c-icon {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.c-socials       { display: flex; gap: 10px; flex-wrap: wrap; }
+.c-socials       { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .c-social-pill {
   display: inline-flex; align-items: center; gap: 8px;
