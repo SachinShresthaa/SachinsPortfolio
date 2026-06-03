@@ -1,49 +1,55 @@
 /* ════ SKILLS PAGE ════ */
 
-/* Override page-hero: allow full-height hero + scrollable content below */
+/* Force block layout — kills page-hero flex that collapses the hero */
 .skills-page {
-  flex-direction: column;
-  align-items: stretch;
-  padding-top: 0;
-  min-height: auto;
-  overflow: visible;
+  display: block         !important;
+  padding-top: 0         !important;
+  min-height: unset      !important;
+  overflow: visible      !important;
+  align-items: unset     !important;
+  justify-content: unset !important;
 }
 
-/* ── Hero area (100vh) ── */
+/* ── Hero (full viewport) ── */
 .sk-hero {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background: var(--bg);
 }
 
-/* "MY" — small eyebrow label, top-right */
+/* "MY" — small eyebrow, top-right */
 .sk-my {
-  font-size: clamp(11px, 1.1vw, 17px);
+  font-size: clamp(11px, 1.1vw, 17px) !important;
   letter-spacing: 0.5em;
   position: absolute;
   top: calc(88px + 56px);
   right: 7vw;
   text-align: right;
   white-space: nowrap;
+  transform: none !important;  /* cancel any translateY from name-word variants */
 }
 
 /* "SKILLS" — dominant word, bottom-left */
 .sk-word {
-  font-size: clamp(90px, 16vw, 260px);
+  font-size: clamp(90px, 16vw, 260px) !important;
   line-height: 0.82;
   position: absolute;
   left: 7vw;
   bottom: 9%;
+  white-space: nowrap;
+  transform: none !important;
 }
 
-/* horizontal rule across mid-hero */
+/* mid-page rule */
 .sk-rule {
   position: absolute;
   left: 7vw; right: 7vw;
   top: 50%;
   height: 1px;
   background: rgba(10,10,10,0.08);
+  pointer-events: none;
 }
 
 /* scroll hint — bottom-left */
@@ -119,13 +125,8 @@
   user-select: none;
   transition: background 0.25s, color 0.25s, border-color 0.25s;
 }
-.sk-tab em {
-  font-style: normal;
-  opacity: 0.38;
-}
-.sk-tab:hover {
-  border-color: rgba(10,10,10,0.35);
-}
+.sk-tab em { font-style: normal; opacity: 0.38; }
+.sk-tab:hover { border-color: rgba(10,10,10,0.35); }
 .sk-tab.active {
   background: var(--fg);
   border-color: var(--fg);
@@ -138,15 +139,17 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  width: 100%;
 }
 
 /* Card */
 .sk-card {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255,255,255,0.65);
   border: 1px solid rgba(10,10,10,0.07);
-  padding: 30px 22px 22px;
+  padding: 28px 22px 20px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;  /* stop children from stretching full-width */
   gap: 14px;
   transition: border-color 0.35s, transform 0.35s cubic-bezier(0.16,1,0.3,1),
               opacity 0.3s, background 0.3s;
@@ -157,18 +160,21 @@
   transform: translateY(-5px);
 }
 
+/* Icon — hard-capped size */
 .sk-icon {
   width: 46px;
   height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 46px;
+  min-height: 46px;
+  max-width: 46px;
+  max-height: 46px;
+  flex-shrink: 0;
 }
 .sk-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
   display: block;
+  width:  46px !important;
+  height: 46px !important;
+  object-fit: contain;
 }
 
 .sk-name {
@@ -182,14 +188,13 @@
 .sk-sub {
   font-family: 'Inter', sans-serif;
   font-size: 9.5px;
-  font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: auto;
 }
 
-/* filtered-out state */
+/* Filter hidden state */
 .sk-card.sk-hide {
   opacity: 0;
   transform: scale(0.94) translateY(6px);
