@@ -20,7 +20,7 @@ function hideBar() {
 /* ── Content reveals per page ── */
 const PAGE_REVEALS = {
   'index.html':      [['hero-photo', 200], ['name-sachin', 200], ['name-shrestha', 200]],
-  'skills.html':     [['page-title', 900]],
+  'skills.html':     [['sk-my', 200], ['sk-word', 200], ['sk-content', 900]],
   'experience.html': [['page-title', 900]],
   'projects.html':   [['page-title', 900]],
   'contact.html':    [['page-title', 900]],
