@@ -123,7 +123,7 @@
   color: var(--fg);
   cursor: none;
   user-select: none;
-  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 .sk-tab em { font-style: normal; opacity: 0.38; }
 .sk-tab:hover { border-color: rgba(10,10,10,0.35); }
