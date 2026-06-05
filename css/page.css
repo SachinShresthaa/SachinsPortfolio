@@ -124,7 +124,7 @@ a.c-item:hover .c-icon {
   display: block;
   font-family: 'Inter', sans-serif;
   font-size: 13px; font-weight: 500;
-  color: var(--fg);
+  color: var(--fg); letter-spacing: 0.01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
