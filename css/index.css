@@ -223,16 +223,18 @@ body::before {
 }
 #hover-bar-text .txt-top { display: block; overflow: hidden; height: 0.6em; }
 #hover-bar-text .txt-top span {
-  display: block; transform-origin: bottom center; transform: scaleY(0);
-  transition: transform 2.2s cubic-bezier(0.16,1,0.3,1) 0.45s;
+  display: block;
+  transform: translateY(110%);
+  transition: transform 3s cubic-bezier(0.16,1,0.3,1) 0.45s;
 }
 #hover-bar-text .txt-bot { display: block; overflow: hidden; height: 0.6em; margin-top: -0.18em; }
 #hover-bar-text .txt-bot span {
-  display: block; margin-top: -0.42em; transform-origin: top center; transform: scaleY(0);
-  transition: transform 2.2s cubic-bezier(0.16,1,0.3,1) 0.45s;
+  display: block; margin-top: -0.42em;
+  transform: translateY(-110%);
+  transition: transform 3s cubic-bezier(0.16,1,0.3,1) 0.45s;
 }
-#hover-bar-text.active .txt-top span { transform: scaleY(1); }
-#hover-bar-text.active .txt-bot span { transform: scaleY(1); }
+#hover-bar-text.active .txt-top span { transform: translateY(0); }
+#hover-bar-text.active .txt-bot span { transform: translateY(0); }
 #hover-bar-text:not(.active):not(.entry-cover):not(.entry-sweep) .txt-top span {
   transition: transform 0.06s ease 0s;
 }
@@ -285,7 +287,7 @@ body::before {
 }
 #hover-bar-text.entry-cover .txt-top span,
 #hover-bar-text.entry-cover .txt-bot span {
-  transform: scaleY(1) !important;
+  transform: translateY(0) !important;
   transition: none !important;
 }
 
@@ -298,7 +300,7 @@ body::before {
 }
 #hover-bar-text.entry-sweep .txt-top span,
 #hover-bar-text.entry-sweep .txt-bot span {
-  transform: scaleY(1) !important;
+  transform: translateY(0) !important;
   transition: none !important;
 }
 
