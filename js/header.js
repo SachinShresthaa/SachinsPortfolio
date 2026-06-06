@@ -24,19 +24,21 @@
   /* ── Nav ── */
   document.body.insertAdjacentHTML('afterbegin', `
     <nav id="navbar">
-      <ul class="nav-left" id="nav-left">
-        <li><a href="skills.html"     data-label="Skills">Skills</a></li>
+      <span class="nav-left" id="nav-left">
+        <a href="skills.html"     data-label="Skills">Skills</a>
         <span class="dot"></span>
-        <li><a href="experience.html" data-label="Experience">Experience</a></li>
-      </ul>
+        <a href="experience.html" data-label="Experience">Experience</a>
+      </span>
+      <span class="dot nav-mid-dot"></span>
       <div class="nav-logo" id="nav-logo" data-label="Home">
         <img src="assets/logo.png" alt="SS" />
       </div>
-      <ul class="nav-right" id="nav-right">
-        <li><a href="projects.html" data-label="Projects">Projects</a></li>
+      <span class="dot nav-mid-dot"></span>
+      <span class="nav-right" id="nav-right">
+        <a href="projects.html" data-label="Projects">Projects</a>
         <span class="dot"></span>
-        <li><a href="contact.html"  data-label="Contact">Contact</a></li>
-      </ul>
+        <a href="contact.html"  data-label="Contact">Contact</a>
+      </span>
     </nav>
   `);
 
@@ -44,8 +46,7 @@
   const current = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('nav a').forEach(a => {
     if (a.getAttribute('href') === current) {
-      a.style.opacity = '1';
-      a.style.fontWeight = '700';
+      a.classList.add('nav-active');
     }
   });
 
