@@ -41,8 +41,7 @@ function updateNavActive(pageName) {
     a.style.opacity    = '';
     a.style.fontWeight = '';
     if (a.getAttribute('href') === pageName) {
-      a.style.opacity    = '1';
-      a.style.fontWeight = '700';
+      a.style.opacity = '1';
     }
   });
 }
