@@ -46,13 +46,15 @@ html, body {
 .hero-image-wrap.visible, .name-word.visible, .scroll-hint.visible { opacity: 1; }
 
 /* nav-left/right use display:contents so children join nav's flex row;
-   opacity is inherited via CSS custom property */
-.nav-left, .nav-right { display: contents; --nav-g: 0; }
+   opacity + translateY are inherited via CSS custom properties */
+.nav-left, .nav-right { display: contents; --nav-g: 0; --nav-y: 20px; }
 .nav-left > *, .nav-right > * {
   opacity: var(--nav-g);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(var(--nav-y));
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
 }
-.nav-left.visible, .nav-right.visible { --nav-g: 1; }
+.nav-left.visible, .nav-right.visible { --nav-g: 1; --nav-y: 0px; }
 
 .nav-logo {
   opacity: 0;

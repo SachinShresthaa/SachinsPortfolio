@@ -99,12 +99,10 @@ function runEntryAnimation(label) {
 
     transitioning = false;
 
-    /* re-reveal logo, then nav items after logo finishes (900ms transition) */
+    /* re-reveal logo and nav together with same slide-up transition */
     document.getElementById('nav-logo')?.classList.add('visible');
-    setTimeout(() => {
-      document.getElementById('nav-left')?.classList.add('visible');
-      document.getElementById('nav-right')?.classList.add('visible');
-    }, 900);
+    document.getElementById('nav-left')?.classList.add('visible');
+    document.getElementById('nav-right')?.classList.add('visible');
   }, 1400);
 }
 
