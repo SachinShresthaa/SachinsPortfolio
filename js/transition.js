@@ -98,11 +98,6 @@ function runEntryAnimation(label) {
     });
 
     transitioning = false;
-
-    /* re-reveal logo and nav together with same slide-up transition */
-    document.getElementById('nav-logo')?.classList.add('visible');
-    document.getElementById('nav-left')?.classList.add('visible');
-    document.getElementById('nav-right')?.classList.add('visible');
   }, 1400);
 }
 
@@ -122,11 +117,6 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
   transitioning = true;
 
   const pageName = href.split('/').pop() || 'index.html';
-
-  /* hide nav so it re-reveals after entry on the new page */
-  ['nav-logo', 'nav-left', 'nav-right'].forEach(id => {
-    document.getElementById(id)?.classList.remove('visible');
-  });
 
   /* cover screen — bar expands + text starts turning white at the same time */
   showBar(label);
