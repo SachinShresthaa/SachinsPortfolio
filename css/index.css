@@ -70,8 +70,8 @@ nav.scrolled {
   background: rgba(238,238,238,0.93);
   backdrop-filter: blur(18px);
 }
-.nav-left { display: flex; align-items: center; justify-content: flex-end; }
-.nav-right { display: flex; align-items: center; justify-content: flex-start; }
+.nav-left { display: flex; align-items: center; justify-content: flex-end; padding-right: 4cm; }
+.nav-right { display: flex; align-items: center; justify-content: flex-start; padding-left: 4cm; }
 .nav-left a, .nav-right a {
   text-decoration: none;
   font-family: 'Inter', sans-serif;
