@@ -71,7 +71,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3cm;
+  gap: 2cm;
   padding: 0 60px;
   padding-top: 1cm;
 }
@@ -96,7 +96,7 @@ nav.scrolled {
 }
 .nav-logo { display: flex; align-items: center; justify-content: center; }
 .nav-logo img {
-  width: 80px; height: 80px;
+  width: 42px; height: 42px;
   object-fit: contain;
   filter: brightness(0) opacity(1);
 }
