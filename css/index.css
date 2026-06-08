@@ -3,6 +3,7 @@
 @font-face {
     font-family: 'Theater';
     src: url('../font/Theaterv04_Bold.ttf') format('truetype');
+    font-display: swap;
 }
 
 :root {
