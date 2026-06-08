@@ -12,6 +12,10 @@
   --photo-w: 340px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   width: 100%;
   background: var(--bg);
