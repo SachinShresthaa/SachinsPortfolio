@@ -398,3 +398,16 @@ body::before {
   transform: translateY(-100%) !important;
   transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 768px) {
+  nav { gap: 1cm; padding: 0 24px; padding-top: 0.6cm; }
+  .about-wrap { padding: 10vh 24px 12vh; }
+  .about-body { grid-template-columns: 1fr; gap: 40px; }
+  .about-heading { font-size: clamp(42px, 10vw, 80px); }
+  :root { --photo-w: 220px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
