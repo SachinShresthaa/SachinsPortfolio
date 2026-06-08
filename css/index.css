@@ -101,7 +101,7 @@ nav.scrolled {
   background: rgba(10,10,10,0.28);
   border-radius: 50%; flex-shrink: 0;
 }
-.nav-logo { display: flex; align-items: center; justify-content: center; }
+.nav-logo { display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .nav-logo img {
   width: 80px; height: 80px;
   object-fit: contain;
