@@ -11,6 +11,8 @@
   --fg: #0a0a0a;
   --muted: rgba(10,10,10,0.38);
   --photo-w: 340px;
+  --transition: cubic-bezier(0.16,1,0.3,1);
+  --duration: 0.9s;
 }
 
 html {
