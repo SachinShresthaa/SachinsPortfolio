@@ -25,19 +25,19 @@
   document.body.insertAdjacentHTML('afterbegin', `
     <nav id="navbar">
       <span class="nav-left" id="nav-left">
-        <a href="skills.html"     data-label="Skills">Skills</a>
-        <span class="dot"></span>
-        <a href="experience.html" data-label="Experience">Experience</a>
+        <a href="skills.html"     data-label="Skills"     aria-label="Skills">Skills</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="experience.html" data-label="Experience" aria-label="Experience">Experience</a>
       </span>
-      <span class="dot nav-mid-dot"></span>
+      <span class="dot nav-mid-dot" aria-hidden="true"></span>
       <div class="nav-logo" id="nav-logo" data-label="Home" role="button" aria-label="Go to home">
         <img src="assets/logo.png" alt="Sachin Shrestha logo" />
       </div>
-      <span class="dot nav-mid-dot"></span>
+      <span class="dot nav-mid-dot" aria-hidden="true"></span>
       <span class="nav-right" id="nav-right">
-        <a href="projects.html" data-label="Projects">Projects</a>
-        <span class="dot"></span>
-        <a href="contact.html"  data-label="Contact">Contact</a>
+        <a href="projects.html" data-label="Projects" aria-label="Projects">Projects</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="contact.html"  data-label="Contact"  aria-label="Contact">Contact</a>
       </span>
     </nav>
   `);
