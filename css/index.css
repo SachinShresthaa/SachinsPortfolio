@@ -128,7 +128,8 @@ nav.scrolled {
   width: 100%; height: 100%; object-fit: cover;
   object-position: top center; display: block;
   filter: grayscale(100%) contrast(1.08);
-  transition: filter 0.7s ease;
+  transition: filter 0.9s ease;
+  will-change: filter;
 }
 .hero-image-wrap img:hover { filter: grayscale(0%) contrast(1.05); }
 .hero-image-wrap::after {
