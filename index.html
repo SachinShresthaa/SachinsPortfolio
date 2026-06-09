@@ -27,6 +27,8 @@
       <img src="assets/pp.png" alt="Sachin Shrestha" loading="eager" decoding="async" />
     </div>
     <span class="name-word name-shrestha" id="name-shrestha">SHRESTHA</span>
+    <span class="hero-label hero-label-left">2003</span>
+    <span class="hero-label hero-label-right">10/04</span>
   </section>
 
   <!-- shared header (cursor + hover-bar + nav) -->
@@ -45,6 +47,7 @@
       }, delay);
     }
     reveal('hero-photo',    200);
+    document.querySelectorAll('.hero-label').forEach(el => setTimeout(() => el.classList.add('visible'), 200));
     reveal('nav-logo',     1000);
     reveal('nav-left',     1000);
     reveal('nav-right',    1000);
