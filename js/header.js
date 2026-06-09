@@ -30,8 +30,8 @@
         <a href="experience.html" data-label="Experience">Experience</a>
       </span>
       <span class="dot nav-mid-dot"></span>
-      <div class="nav-logo" id="nav-logo" data-label="Home">
-        <img src="assets/logo.png" alt="SS" />
+      <div class="nav-logo" id="nav-logo" data-label="Home" role="button" aria-label="Go to home">
+        <img src="assets/logo.png" alt="Sachin Shrestha logo" />
       </div>
       <span class="dot nav-mid-dot"></span>
       <span class="nav-right" id="nav-right">
