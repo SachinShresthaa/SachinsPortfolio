@@ -355,3 +355,8 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+@media print {
+  #cursor-dot, #cursor-ring, #hover-bar, #hover-bar-text { display: none !important; }
+  nav { position: static; }
+}
