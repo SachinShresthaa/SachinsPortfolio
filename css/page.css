@@ -221,3 +221,8 @@ a.c-item:hover .c-icon {
   color: var(--fg);
 }
 .f-success.show                 { display: block; }
+
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+  .c-desc { max-width: unset; }
+}
