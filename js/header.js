@@ -23,7 +23,7 @@
 
   /* ── Nav ── */
   document.body.insertAdjacentHTML('afterbegin', `
-    <nav id="navbar">
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
       <span class="nav-left" id="nav-left">
         <a href="skills.html"     data-label="Skills"     aria-label="Skills">Skills</a>
         <span class="dot" aria-hidden="true"></span>
