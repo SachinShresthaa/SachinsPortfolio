@@ -7,7 +7,7 @@ document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
   dot.style.left = mx + 'px';
   dot.style.top  = my + 'px';
-});
+}, { passive: true });
 (function raf() {
   rx += (mx - rx) * 0.1;
   ry += (my - ry) * 0.1;
