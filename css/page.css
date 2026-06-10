@@ -19,6 +19,7 @@
   transform: none;
   text-align: center;
   font-size: clamp(48px, 10vw, 160px);
+  letter-spacing: 0.04em;
 }
 
 /* ════ CONTACT PAGE ════ */
