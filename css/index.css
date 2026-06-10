@@ -124,6 +124,7 @@ nav.scrolled {
   position: relative; width: 100vw; min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden; background: var(--bg); padding-top: 0px;
+  isolation: isolate;
 }
 .hero-image-wrap {
   position: relative; width: var(--photo-w); height: 490px;
