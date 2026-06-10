@@ -165,6 +165,9 @@ document.querySelectorAll('.nav-left a, .nav-right a').forEach(a => {
     e.preventDefault();
     goToPage(a.getAttribute('href'), a.dataset.label);
   });
+  a.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); goToPage(a.getAttribute('href'), a.dataset.label); }
+  });
 });
 
 const logo = document.getElementById('nav-logo');
