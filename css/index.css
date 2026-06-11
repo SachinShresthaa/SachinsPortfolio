@@ -179,7 +179,7 @@ nav.scrolled {
   right: calc(47% + 170px);
   top: calc(52% + 50px);
   text-align: right;
-  z-index: 2;
+  z-index: 4;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 500;
