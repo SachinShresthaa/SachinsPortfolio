@@ -176,14 +176,14 @@ nav.scrolled {
 /* ══ HERO SUB (BCA STUDENT) ══ */
 .hero-sub {
   position: absolute;
-  right: calc(47% + 170px);
-  top: calc(52% + 50px);
+  right: calc(50% + 170px);
+  top: calc(49% + 50px);
   text-align: right;
   z-index: 4;
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
   color: rgba(10,10,10,0.55);
   white-space: nowrap;
@@ -191,6 +191,12 @@ nav.scrolled {
   transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1);
 }
 .hero-sub.visible { opacity: 1; }
+.hero-sub-dev {
+  right: auto;
+  left: calc(43.3% + 170px);
+  top: calc(59% + 105px);
+  text-align: left;
+}
 
 /* ══ HERO LABELS ══ */
 .hero-label {
