@@ -162,16 +162,35 @@ nav.scrolled {
   text-transform: uppercase; color: var(--fg);
   letter-spacing: 0.05em; line-height: 1;
   white-space: nowrap;
-  font-size: clamp(20px, 6vw, 120px);
+  font-size: clamp(25px, 10vw, 150px);
 }
 .name-sachin {
-  right: calc(44.5% + 170px); top: calc(47% - 30px);
+  right: calc(47% + 170px); top: calc(52% - 30px);
   transform: translateY(-50%); text-align: right;
 }
 .name-shrestha {
-  left: calc(42.8% + 170px); top: calc(50.5% + 55px);
+  left: calc(43.3% + 170px); top: calc(59% + 55px);
   transform: translateY(-50%); text-align: left;
 }
+
+/* ══ HERO SUB (BCA STUDENT) ══ */
+.hero-sub {
+  position: absolute;
+  right: calc(47% + 170px);
+  top: calc(52% + 50px);
+  text-align: right;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.55);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-sub.visible { opacity: 1; }
 
 /* ══ HERO LABELS ══ */
 .hero-label {
@@ -224,7 +243,7 @@ body::before {
 /* ══ HOVER BAR ══ */
 #hover-bar {
   position: fixed;
-  top: calc(55% - 135px); left: 0; right: 0;
+  top: calc(61.5% - 135px); left: 0; right: 0;
   height: 150px;
   z-index: 9999 !important;  /* above EVERYTHING including nav */
   pointer-events: none;
@@ -255,7 +274,7 @@ body::before {
 
 #hover-bar-text {
   position: fixed;
-  top: calc(55% - 42px); left: 50%;
+  top: calc(61.5% - 42px); left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10000;
   line-height: 1;
