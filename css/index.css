@@ -29,6 +29,7 @@ html, body {
   color: var(--fg);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -193,7 +194,7 @@ nav.scrolled {
 .hero-sub.visible { opacity: 1; }
 .hero-sub-dev {
   right: auto;
-  left: calc(43.3% + 170px);
+  left: calc(44.5% + 170px);
   top: calc(59% + 105px);
   text-align: left;
 }
