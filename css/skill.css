@@ -148,6 +148,7 @@
   border: 1px solid rgba(10,10,10,0.07);
   border-radius: 4px;
   padding: 28px 22px 20px;
+  will-change: transform;
   display: flex;
   flex-direction: column;
   align-items: flex-start;  /* stop children from stretching full-width */
