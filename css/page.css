@@ -78,6 +78,7 @@
   color: rgba(10,10,10,0.5);
   max-width: 300px;
   margin-bottom: 52px;
+  overflow-wrap: break-word;
 }
 
 .c-items { margin-bottom: 48px; }
