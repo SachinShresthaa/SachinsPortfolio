@@ -158,8 +158,17 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
 }
 
 /* ── Nav event listeners ── */
+const prefetched = new Set();
+function prefetch(href) {
+  if (prefetched.has(href)) return;
+  prefetched.add(href);
+  const link = document.createElement('link');
+  link.rel = 'prefetch'; link.href = href;
+  document.head.appendChild(link);
+}
+
 document.querySelectorAll('.nav-left a, .nav-right a').forEach(a => {
-  a.addEventListener('mouseenter', () => { if (!transitioning) showBar(a.dataset.label); });
+  a.addEventListener('mouseenter', () => { if (!transitioning) { showBar(a.dataset.label); prefetch(a.getAttribute('href')); } });
   a.addEventListener('mouseleave', hideBar);
   a.addEventListener('click', e => {
     e.preventDefault();
