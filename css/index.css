@@ -17,6 +17,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-synthesis: none;
 }
 
 ::selection { background: var(--fg); color: var(--bg); }
