@@ -19,9 +19,9 @@ document.querySelectorAll('a, button, [role="button"]').forEach(el => {
   el.addEventListener('mouseenter', () => {
     dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
     ring.style.width = '52px'; ring.style.height = '52px';
-  });
+  }, { passive: true });
   el.addEventListener('mouseleave', () => {
     dot.style.transform = 'translate(-50%,-50%) scale(1)';
     ring.style.width = '34px'; ring.style.height = '34px';
-  });
+  }, { passive: true });
 });
