@@ -57,6 +57,7 @@
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 22px;
+  user-select: none;
 }
 
 .c-heading {
@@ -152,6 +153,7 @@ a.c-item:hover .c-icon {
   font-family: 'Inter', sans-serif;
   font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 36px;
+  user-select: none;
 }
 
 .c-form          { display: flex; flex-direction: column; }
