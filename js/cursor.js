@@ -8,6 +8,12 @@ document.addEventListener('mousemove', e => {
   dot.style.left = mx + 'px';
   dot.style.top  = my + 'px';
 }, { passive: true });
+document.addEventListener('mouseleave', () => {
+  dot.style.opacity = '0'; ring.style.opacity = '0';
+}, { passive: true });
+document.addEventListener('mouseenter', () => {
+  dot.style.opacity = '1'; ring.style.opacity = '1';
+}, { passive: true });
 (function raf() {
   rx += (mx - rx) * 0.1;
   ry += (my - ry) * 0.1;
