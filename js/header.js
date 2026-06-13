@@ -31,7 +31,7 @@
       </span>
       <span class="dot nav-mid-dot" aria-hidden="true"></span>
       <div class="nav-logo" id="nav-logo" data-label="Home" role="button" aria-label="Go to home" tabindex="0">
-        <img src="assets/logo.png" alt="Sachin Shrestha logo" />
+        <img src="assets/logo.png" alt="Sachin Shrestha logo" draggable="false" />
       </div>
       <span class="dot nav-mid-dot" aria-hidden="true"></span>
       <span class="nav-right" id="nav-right">
