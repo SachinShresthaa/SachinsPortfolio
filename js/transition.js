@@ -129,7 +129,7 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
   const coverDone = new Promise(r => setTimeout(r, 800));
   let html;
   try {
-    html = await fetch(href).then(r => r.text());
+    html = await fetch(href, { cache: 'force-cache' }).then(r => r.text());
   } catch {
     await coverDone;
     window.location.href = href; /* hard fallback if fetch fails */
