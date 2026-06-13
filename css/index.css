@@ -19,6 +19,8 @@ img, svg { display: block; max-width: 100%; }
 html {
   scroll-behavior: smooth;
   font-synthesis: none;
+  scroll-padding-top: 88px;
+  tab-size: 2;
 }
 
 ::selection { background: var(--fg); color: var(--bg); }
