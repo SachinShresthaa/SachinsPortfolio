@@ -40,8 +40,10 @@ function updateNavActive(pageName) {
   document.querySelectorAll('nav a').forEach(a => {
     a.style.opacity    = '';
     a.style.fontWeight = '';
+    a.removeAttribute('aria-current');
     if (a.getAttribute('href') === pageName) {
       a.style.opacity = '1';
+      a.setAttribute('aria-current', 'page');
     }
   });
 }
