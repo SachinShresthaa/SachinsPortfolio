@@ -150,6 +150,7 @@
   padding: 28px 22px 20px;
   will-change: transform;
   backface-visibility: hidden;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: flex-start;  /* stop children from stretching full-width */
