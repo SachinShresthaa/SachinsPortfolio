@@ -80,6 +80,7 @@
   max-width: 300px;
   margin-bottom: 52px;
   overflow-wrap: break-word;
+  hyphens: auto; -webkit-hyphens: auto;
 }
 
 .c-items { margin-bottom: 48px; }
