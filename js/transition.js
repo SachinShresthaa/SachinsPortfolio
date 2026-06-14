@@ -199,6 +199,8 @@ window.addEventListener('popstate', e => {
 });
 
 /* ── Record current page in history state so popstate works ── */
+history.scrollRestoration = 'manual';
+
 (function recordInitialState() {
   const labels = {
     'index.html': 'Home', 'skills.html': 'Skills',
