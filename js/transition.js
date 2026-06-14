@@ -117,6 +117,7 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
   if (currentPage === targetPage) return;
 
   transitioning = true;
+  if (document.activeElement) document.activeElement.blur();
 
   const pageName = href.split('/').pop() || 'index.html';
 
