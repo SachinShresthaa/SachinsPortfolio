@@ -158,7 +158,7 @@ a.c-item:hover .c-icon {
   user-select: none;
 }
 
-.c-form          { display: flex; flex-direction: column; }
+.c-form          { display: flex; flex-direction: column; accent-color: var(--fg); }
 
 .f-row           { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
 
