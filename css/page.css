@@ -179,6 +179,7 @@ a.c-item:hover .c-icon {
   border-bottom: 1px solid rgba(10,10,10,0.14);
   outline: none; padding: 0 0 13px;
   -webkit-appearance: none; appearance: none;
+  font-variant-numeric: tabular-nums;
   font-family: 'Inter', sans-serif;
   font-size: 14px; font-weight: 400; color: var(--fg);
   resize: none; cursor: none;
