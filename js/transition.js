@@ -153,6 +153,7 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
     history.pushState({ pageName, label }, fetchedDoc.title, href);
   }
   document.title = fetchedDoc.title;
+  document.documentElement.dataset.page = pageName;
   updateNavActive(pageName);
 
   /* animate entry and reveal new content */
