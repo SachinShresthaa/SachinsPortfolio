@@ -404,6 +404,11 @@ body::before {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
+@media (hover: none) {
+  #cursor-dot, #cursor-ring { display: none !important; }
+  html, body { cursor: auto; }
+}
+
 @media print {
   #cursor-dot, #cursor-ring, #hover-bar, #hover-bar-text { display: none !important; }
   nav { position: static; }
