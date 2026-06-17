@@ -1,4 +1,6 @@
 /* ── Shared cursor — used on every page ── */
+if (window.matchMedia('(hover: none)').matches) { /* touch device — skip cursor */ }
+else {
 const dot  = document.getElementById('cursor-dot');
 const ring = document.getElementById('cursor-ring');
 let mx=0, my=0, rx=0, ry=0;
@@ -31,3 +33,4 @@ document.querySelectorAll('a, button, [role="button"]').forEach(el => {
     ring.style.width = '34px'; ring.style.height = '34px';
   }, { passive: true });
 });
+}
