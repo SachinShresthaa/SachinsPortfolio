@@ -22,6 +22,8 @@ html {
   font-synthesis: none;
   scroll-padding-top: 88px;
   tab-size: 2;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 ::selection { background: var(--fg); color: var(--bg); }
