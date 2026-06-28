@@ -224,6 +224,7 @@ nav.scrolled {
   transform: none;
   z-index: 2;
   opacity: 0;
+  user-select: none;
   transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), color 0.3s;
 }
 .hero-label.visible { opacity: 1; }
