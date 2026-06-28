@@ -23,7 +23,7 @@ document.addEventListener('mouseenter', () => {
   ring.style.top  = ry + 'px';
   requestAnimationFrame(raf);
 })();
-document.querySelectorAll('a, button, [role="button"], .sk-tab, .f-submit').forEach(el => {
+document.querySelectorAll('a, button, label, [role="button"], .sk-tab, .f-submit').forEach(el => {
   el.addEventListener('mouseenter', () => {
     dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
     ring.style.width = '52px'; ring.style.height = '52px';
