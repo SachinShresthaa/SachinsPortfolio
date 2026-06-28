@@ -207,3 +207,11 @@
   transform: scale(0.94) translateY(6px);
   pointer-events: none;
 }
+
+@media (max-width: 900px) {
+  .sk-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .sk-grid { grid-template-columns: repeat(2, 1fr); }
+}
