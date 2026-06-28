@@ -119,8 +119,6 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
   transitioning = true;
   if (document.activeElement) document.activeElement.blur();
 
-  const pageName = href.split('/').pop() || 'index.html';
-
   /* cover screen — bar expands + text starts turning white at the same time */
   showBar(label);
   requestAnimationFrame(() => {
@@ -150,15 +148,15 @@ async function goToPage(href, label, { pushState: shouldPush = true } = {}) {
 
   /* update URL, title, nav */
   if (shouldPush) {
-    history.pushState({ pageName, label }, fetchedDoc.title, href);
+    history.pushState({ pageName: targetPage, label }, fetchedDoc.title, href);
   }
   document.title = fetchedDoc.title;
-  document.documentElement.dataset.page = pageName;
-  updateNavActive(pageName);
+  document.documentElement.dataset.page = targetPage;
+  updateNavActive(targetPage);
 
   /* animate entry and reveal new content */
   runEntryAnimation(label);
-  runReveals(pageName);
+  runReveals(targetPage);
 }
 
 /* ── Nav event listeners ── */
