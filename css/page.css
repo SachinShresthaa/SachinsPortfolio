@@ -233,3 +233,8 @@ a.c-item:hover .c-icon {
   .contact-grid { grid-template-columns: 1fr; gap: 52px; }
   .c-desc { max-width: unset; }
 }
+
+@media (max-width: 600px) {
+  .f-row { grid-template-columns: 1fr; gap: 0; }
+  .contact-hero { padding: calc(88px + 40px) 6vw 60px; }
+}
