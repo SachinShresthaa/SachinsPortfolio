@@ -129,6 +129,7 @@ a.c-item:hover .c-icon {
   font-size: 13px; font-weight: 500;
   color: var(--fg); letter-spacing: 0.01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  word-break: break-all;
   font-variant-numeric: tabular-nums;
 }
 
