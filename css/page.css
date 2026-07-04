@@ -221,6 +221,7 @@ a.c-item:hover .c-icon {
 .f-note {
   font-family: 'Inter', sans-serif;
   font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
+  user-select: none;
 }
 
 .f-success {
