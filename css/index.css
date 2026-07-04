@@ -29,7 +29,7 @@ html {
 
 ::selection { background: var(--fg); color: var(--bg); }
 
-:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
 
 html, body {
   width: 100%;
