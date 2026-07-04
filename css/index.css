@@ -25,6 +25,7 @@ html {
   tab-size: 2;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overscroll-behavior-y: none;
 }
 
 ::selection { background: var(--fg); color: var(--bg); }
