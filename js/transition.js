@@ -48,10 +48,6 @@ function updateNavActive(pageName) {
   });
 }
 
-/* ══════════════════════════════════════════════════
-   ENTRY ANIMATION
-   Bar sweeps upward. Text rides up with it and fades.
-══════════════════════════════════════════════════ */
 function runEntryAnimation(label) {
   barText.innerHTML =
     `<span class="txt-top"><span>${label}</span></span>` +
