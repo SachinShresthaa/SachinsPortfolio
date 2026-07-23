@@ -68,9 +68,7 @@ function runEntryAnimation(label) {
 
   /* cleanup after sweep finishes */
   setTimeout(() => {
-    /* Step 1 — inline transition:none prevents the CSS 0.55s transition from
-       firing when !important is lifted in step 2.
-       scaleY(0) will take effect once the !important classes are removed. */
+    
     bar.querySelectorAll('.bar-top, .bar-bot').forEach(el => {
       el.style.transition = 'none';
       el.style.transform  = 'scaleY(0)';
